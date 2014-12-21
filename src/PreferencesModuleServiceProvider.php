@@ -22,7 +22,6 @@ class PreferencesModuleServiceProvider extends ServiceProvider
     {
         $this->registerServiceProviders();
         $this->registerPreferencesService();
-        $this->registerHelpers();
     }
 
     /**
@@ -48,12 +47,5 @@ class PreferencesModuleServiceProvider extends ServiceProvider
         );
     }
 
-    /**
-     * Register helpers.
-     */
-    protected function registerHelpers()
-    {
-        include_once __DIR__ . '/../resources/helpers.php';
-    }
 }
  
