@@ -1,4 +1,4 @@
-<?php namespace Anomaly\Streams\Addon\Module\Preferences;
+<?php namespace Anomaly\PreferencesModule;
 
 use Anomaly\Streams\Platform\Addon\Module\ModuleTag;
 

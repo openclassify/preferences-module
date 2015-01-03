@@ -1,4 +1,4 @@
-<?php namespace Anomaly\Streams\Addon\Module\Preferences;
+<?php namespace Anomaly\PreferencesModule;
 
 use Anomaly\Streams\Platform\Addon\Module\ModuleInstaller;
 
@@ -8,7 +8,7 @@ use Anomaly\Streams\Platform\Addon\Module\ModuleInstaller;
  * @link          http://anomaly.is/streams-platform
  * @author        AnomalyLabs, Inc. <hello@anomaly.is>
  * @author        Ryan Thompson <ryan@anomaly.is>
- * @package       Anomaly\Streams\Addon\Module\Preferences
+ * @package       Anomaly\PreferencesModule
  */
 class PreferencesModuleInstaller extends ModuleInstaller
 {
@@ -19,7 +19,7 @@ class PreferencesModuleInstaller extends ModuleInstaller
      * @var array
      */
     protected $installers = [
-        'Anomaly\Streams\Addon\Module\Preferences\Installer\PreferencesFieldInstaller',
-        'Anomaly\Streams\Addon\Module\Preferences\Installer\PreferencesStreamInstaller',
+        'Anomaly\PreferencesModule\Installer\PreferencesFieldInstaller',
+        'Anomaly\PreferencesModule\Installer\PreferencesStreamInstaller',
     ];
 }

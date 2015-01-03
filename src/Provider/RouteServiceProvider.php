@@ -1,4 +1,4 @@
-<?php namespace Anomaly\Streams\Addon\Module\Preferences\Provider;
+<?php namespace Anomaly\PreferencesModule\Provider;
 
 class RouteServiceProvider extends \Illuminate\Foundation\Support\Providers\RouteServiceProvider
 {
@@ -40,7 +40,7 @@ class RouteServiceProvider extends \Illuminate\Foundation\Support\Providers\Rout
 
     protected function registerPreferencesRoutes()
     {
-        get('admin/preferences', 'Anomaly\Streams\Addon\Module\Preferences\Http\Admin\PreferencesController@index');
+        get('admin/preferences', 'Anomaly\PreferencesModule\Http\Admin\PreferencesController@index');
     }
 
 }

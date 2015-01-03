@@ -1,4 +1,4 @@
-<?php namespace Anomaly\Streams\Addon\Module\Preferences\Installer;
+<?php namespace Anomaly\PreferencesModule\Installer;
 
 use Anomaly\Streams\Platform\Field\FieldInstaller;
 

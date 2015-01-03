@@ -1,4 +1,4 @@
-<?php namespace Anomaly\Streams\Addon\Module\Preferences\Exception;
+<?php namespace Anomaly\PreferencesModule\Exception;
 
 class PreferenceDoesNotExistException extends \Exception
 {

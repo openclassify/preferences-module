@@ -1,4 +1,4 @@
-<?php namespace Anomaly\Streams\Addon\Module\Preferences\Preference;
+<?php namespace Anomaly\PreferencesModule\Preference;
 
 use Anomaly\Streams\Platform\Model\Preferences\PreferencesPreferencesEntryModel;
 

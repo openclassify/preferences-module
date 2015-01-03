@@ -1,4 +1,4 @@
-<?php namespace Anomaly\Streams\Addon\Module\Preferences\Http\Admin;
+<?php namespace Anomaly\PreferencesModule\Http\Admin;
 
 use Anomaly\Streams\Platform\Http\Controller\AdminController;
 

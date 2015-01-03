@@ -1,6 +1,6 @@
-<?php namespace Anomaly\Streams\Addon\Module\Preferences\Preference;
+<?php namespace Anomaly\PreferencesModule\Preference;
 
-use Anomaly\Streams\Addon\Module\Preferences\Exception\PreferenceDoesNotExistException;
+use Anomaly\PreferencesModule\Exception\PreferenceDoesNotExistException;
 
 class PreferenceService
 {

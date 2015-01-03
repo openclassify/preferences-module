@@ -1,4 +1,4 @@
-<?php namespace Anomaly\Streams\Addon\Module\Preferences;
+<?php namespace Anomaly\PreferencesModule;
 
 /**
  * Class PreferencesModulePreferences
@@ -6,7 +6,7 @@
  * @link          http://anomaly.is/streams-platform
  * @author        AnomalyLabs, Inc. <hello@anomaly.is>
  * @author        Ryan Thompson <ryan@anomaly.is>
- * @package       Anomaly\Streams\Addon\Module\Preferences
+ * @package       Anomaly\PreferencesModule
  */
 class PreferencesModulePreferences extends Preferences
 {
