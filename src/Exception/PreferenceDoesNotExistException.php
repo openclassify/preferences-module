@@ -2,5 +2,6 @@
 
 class PreferenceDoesNotExistException extends \Exception
 {
+
 }
  

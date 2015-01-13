@@ -27,4 +27,5 @@ class PreferencesStreamInstaller extends StreamInstaller
         'user'       => [],
         'value'      => [],
     ];
+
 }

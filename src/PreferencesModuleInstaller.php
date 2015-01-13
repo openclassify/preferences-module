@@ -22,4 +22,5 @@ class PreferencesModuleInstaller extends ModuleInstaller
         'Anomaly\PreferencesModule\Installer\PreferencesFieldInstaller',
         'Anomaly\PreferencesModule\Installer\PreferencesStreamInstaller',
     ];
+
 }

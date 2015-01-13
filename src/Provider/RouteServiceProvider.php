@@ -42,6 +42,5 @@ class RouteServiceProvider extends \Illuminate\Foundation\Support\Providers\Rout
     {
         get('admin/preferences', 'Anomaly\PreferencesModule\Http\Admin\PreferencesController@index');
     }
-
 }
  

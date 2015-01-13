@@ -14,4 +14,5 @@ class PreferencesModule extends Module
 {
 
     protected $navigation = 'streams::navigation.system';
+
 }

@@ -1,8 +1,8 @@
 <?php namespace Anomaly\PreferencesModule;
 
-use Illuminate\Support\ServiceProvider;
 use Anomaly\PreferencesModule\Preference\PreferenceModel;
 use Anomaly\PreferencesModule\Preference\PreferenceService;
+use Illuminate\Support\ServiceProvider;
 
 /**
  * Class PreferencesModuleServiceProvider
@@ -42,10 +42,8 @@ class PreferencesModuleServiceProvider extends ServiceProvider
             function () {
 
                 return new PreferenceService(new PreferenceModel());
-
             }
         );
     }
-
 }
  
