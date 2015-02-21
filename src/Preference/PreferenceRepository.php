@@ -98,7 +98,10 @@ class PreferenceRepository implements PreferenceRepositoryInterface
         $preference = $this->model->where('user_id', $this->auth->id())->where('key', $key)->first();
 
         if (!$preference) {
+
             $preference = $this->model->newInstance();
+
+            $preference->user_id = $this->auth->id();
 
             $preference->key = $key;
         }
