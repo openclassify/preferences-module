@@ -1,4 +1,3 @@
-preferences-module
-==================
+# Preferences Module
 
-Preferences management for the Streams Platform.
+Preferences management. 

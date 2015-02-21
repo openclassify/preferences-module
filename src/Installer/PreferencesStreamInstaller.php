@@ -2,6 +2,14 @@
 
 use Anomaly\Streams\Platform\Stream\StreamInstaller;
 
+/**
+ * Class PreferencesStreamInstaller
+ *
+ * @link          http://anomaly.is/streams-platform
+ * @author        AnomalyLabs, Inc. <hello@anomaly.is>
+ * @author        Ryan Thompson <ryan@anomaly.is>
+ * @package       Anomaly\Preferences\Module\Installer
+ */
 class PreferencesStreamInstaller extends StreamInstaller
 {
 
@@ -12,7 +20,7 @@ class PreferencesStreamInstaller extends StreamInstaller
      */
     protected $stream = [
         'slug'   => 'preferences',
-        'locked' => true,
+        'locked' => true
     ];
 
     /**
@@ -21,11 +29,9 @@ class PreferencesStreamInstaller extends StreamInstaller
      * @var array
      */
     protected $assignments = [
-        'addon_type' => [],
-        'addon_slug' => [],
-        'key'        => [],
-        'user'       => [],
-        'value'      => [],
+        'user'  => ['required' => true],
+        'key'   => ['required' => true],
+        'value' => []
     ];
 
 }

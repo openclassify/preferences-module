@@ -2,5 +2,8 @@
 
 return [
     'name'        => 'Preferences',
-    'description' => 'Preferences module.',
+    'description' => 'Preferences management.',
+    'section'     => [
+        'preferences' => 'Preferences'
+    ]
 ];

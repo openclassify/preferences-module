@@ -2,6 +2,14 @@
 
 use Anomaly\Streams\Platform\Field\FieldInstaller;
 
+/**
+ * Class PreferencesFieldInstaller
+ *
+ * @link          http://anomaly.is/streams-platform
+ * @author        AnomalyLabs, Inc. <hello@anomaly.is>
+ * @author        Ryan Thompson <ryan@anomaly.is>
+ * @package       Anomaly\Preferences\Module\Installer
+ */
 class PreferencesFieldInstaller extends FieldInstaller
 {
 
@@ -11,21 +19,18 @@ class PreferencesFieldInstaller extends FieldInstaller
      * @var array
      */
     protected $fields = [
-        'addon_type' => [
-            'type' => 'text',
+        'user'  => [
+            'type'   => 'anomaly.field_type.relationship',
+            'config' => [
+                'related' => 'Anomaly\UsersModule\User\UserModel'
+            ]
         ],
-        'addon_slug' => [
-            'type' => 'text',
+        'key'   => [
+            'type' => 'anomaly.field_type.users'
         ],
-        'key'        => [
-            'type' => 'text',
-        ],
-        'user'       => [
-            'type' => 'relationship',
-        ],
-        'value'      => [
-            'type' => 'textarea',
-        ],
+        'value' => [
+            'type' => 'anomaly.field_type.textarea'
+        ]
     ];
 
 }

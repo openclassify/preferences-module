@@ -1,13 +1,24 @@
 <?php namespace Anomaly\PreferencesModule\Preference;
 
+use Anomaly\PreferencesModule\Preference\Contract\PreferenceInterface;
 use Anomaly\Streams\Platform\Model\Preferences\PreferencesPreferencesEntryModel;
 
-class PreferenceModel extends PreferencesPreferencesEntryModel
+/**
+ * Class PreferenceModel
+ *
+ * @link          http://anomaly.is/streams-platform
+ * @author        AnomalyLabs, Inc. <hello@anomaly.is>
+ * @author        Ryan Thompson <ryan@anomaly.is>
+ * @package       Anomaly\PreferencesModule\PreferenceInterface
+ */
+class PreferenceModel extends PreferencesPreferencesEntryModel implements PreferenceInterface
 {
 
-    public function newCollection(array $items = [])
-    {
-        return new PreferenceCollection($items);
-    }
+    /**
+     * The cache minutes.
+     *
+     * @var int
+     */
+    protected $cacheMinutes = 99999;
+
 }
- 

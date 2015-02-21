@@ -1,7 +1,5 @@
 <?php namespace Anomaly\PreferencesModule;
 
-use Anomaly\PreferencesModule\Preference\PreferenceModel;
-use Anomaly\PreferencesModule\Preference\PreferenceService;
 use Illuminate\Support\ServiceProvider;
 
 /**
@@ -16,34 +14,24 @@ class PreferencesModuleServiceProvider extends ServiceProvider
 {
 
     /**
+     * Boot the service provider.
+     */
+    public function boot()
+    {
+        if (app('Anomaly\Streams\Platform\Application\Application')->isInstalled()) {
+            $this->app->make('twig')->addExtension(
+                $this->app->make('\Anomaly\PreferencesModule\PreferenceModulePlugin')
+            );
+        }
+    }
+
+    /**
      * Register the service provider.
+     *
+     * @return void
      */
     public function register()
     {
-        $this->registerServiceProviders();
-        $this->registerPreferencesService();
-    }
-
-    /**
-     * Register the service providers.
-     */
-    protected function registerServiceProviders()
-    {
-        $this->app->register('Anomaly\PreferencesModule\Provider\RouteServiceProvider');
-    }
-
-    /**
-     * Register preferences service.
-     */
-    protected function registerPreferencesService()
-    {
-        $this->app->singleton(
-            'streams.preferences',
-            function () {
-
-                return new PreferenceService(new PreferenceModel());
-            }
-        );
+        $this->app->register('Anomaly\PreferencesModule\Preference\PreferenceServiceProvider');
     }
 }
- 
