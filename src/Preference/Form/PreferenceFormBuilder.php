@@ -57,4 +57,3 @@ class PreferenceFormBuilder extends FormBuilder
         parent::__construct($form);
     }
 }
- 
