@@ -26,7 +26,7 @@ class PreferencesFieldInstaller extends FieldInstaller
             ]
         ],
         'key'   => [
-            'type' => 'anomaly.field_type.users'
+            'type' => 'anomaly.field_type.text'
         ],
         'value' => [
             'type' => 'anomaly.field_type.textarea'
