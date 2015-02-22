@@ -45,11 +45,11 @@ class PreferenceFormFields
          * Get the fields from the config system. Sections are
          * optionally defined the same way.
          */
-        if (!$fields = $this->config->get($namespace . 'preferences.fields')) {
+        if (!$fields = $this->config->get($namespace . 'preferences/preferences')) {
             $fields = $fields = $this->config->get($namespace . 'preferences', []);
         }
 
-        if ($sections = $this->config->get($namespace . 'preferences.sections')) {
+        if ($sections = $this->config->get($namespace . 'preferences/sections')) {
             $builder->setFormOption('sections', $sections);
         }
 
