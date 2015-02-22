@@ -29,8 +29,15 @@ class PreferencesStreamInstaller extends StreamInstaller
      * @var array
      */
     protected $assignments = [
-        'user'  => ['required' => true],
-        'key'   => ['required' => true],
+        'user'  => [
+            'required' => true
+        ],
+        'key'   => [
+            'required' => true
+        ],
+        'type'  => [
+            'required' => true
+        ],
         'value' => []
     ];
 
