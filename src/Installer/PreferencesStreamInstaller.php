@@ -35,9 +35,6 @@ class PreferencesStreamInstaller extends StreamInstaller
         'key'   => [
             'required' => true
         ],
-        'type'  => [
-            'required' => true
-        ],
         'value' => []
     ];
 
