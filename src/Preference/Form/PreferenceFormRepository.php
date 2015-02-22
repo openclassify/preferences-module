@@ -2,20 +2,20 @@
 
 use Anomaly\PreferencesModule\Preference\Contract\PreferenceRepositoryInterface;
 use Anomaly\Streams\Platform\Addon\FieldType\FieldType;
-use Anomaly\Streams\Platform\Ui\Form\Contract\FormRepository;
+use Anomaly\Streams\Platform\Ui\Form\Contract\FormRepositoryInterface;
 use Anomaly\Streams\Platform\Ui\Form\Form;
 use Illuminate\Config\Repository;
 use Illuminate\Container\Container;
 
 /**
- * Class PreferenceFormRepository
+ * Class PreferenceFormRepositoryInterface
  *
  * @link          http://anomaly.is/streams-platform
  * @author        AnomalyLabs, Inc. <hello@anomaly.is>
  * @author        Ryan Thompson <ryan@anomaly.is>
  * @package       Anomaly\PreferencesModule\Preference\Form
  */
-class PreferenceFormRepository implements FormRepository
+class PreferenceFormRepository implements FormRepositoryInterface
 {
 
     /**
@@ -40,7 +40,7 @@ class PreferenceFormRepository implements FormRepository
     protected $container;
 
     /**
-     * Create a new PreferenceFormRepository instance.
+     * Create a new PreferenceFormRepositoryInterface instance.
      *
      * @param Repository                    $config
      * @param Container                     $container
