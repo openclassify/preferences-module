@@ -20,7 +20,7 @@ class PreferencesModuleServiceProvider extends ServiceProvider
     {
         if (app('Anomaly\Streams\Platform\Application\Application')->isInstalled()) {
             $this->app->make('twig')->addExtension(
-                $this->app->make('\Anomaly\PreferencesModule\PreferenceModulePlugin')
+                $this->app->make('\Anomaly\PreferencesModule\PreferencesModulePlugin')
             );
         }
     }

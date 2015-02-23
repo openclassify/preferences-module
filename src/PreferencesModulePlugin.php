@@ -4,14 +4,14 @@ use Anomaly\PreferencesModule\Preference\Contract\PreferenceRepositoryInterface;
 use Anomaly\Streams\Platform\Addon\Plugin\Plugin;
 
 /**
- * Class PreferenceModulePlugin
+ * Class PreferencesModulePlugin
  *
  * @link          http://anomaly.is/streams-platform
  * @author        AnomalyLabs, Inc. <hello@anomaly.is>
  * @author        Ryan Thompson <ryan@anomaly.is>
  * @package       Anomaly\PreferencesModule
  */
-class PreferenceModulePlugin extends Plugin
+class PreferencesModulePlugin extends Plugin
 {
 
     /**
@@ -22,7 +22,7 @@ class PreferenceModulePlugin extends Plugin
     protected $preferences;
 
     /**
-     * Create a new PreferenceModulePlugin instance.
+     * Create a new PreferencesModulePlugin instance.
      *
      * @param PreferenceRepositoryInterface $preferences
      */
