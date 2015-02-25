@@ -71,14 +71,13 @@ class PreferenceFormRepository implements FormRepositoryInterface
      */
     public function save(Form $form)
     {
-        $request   = $form->getRequest();
         $namespace = $form->getEntry() . '::';
 
         foreach ($form->getFields() as $field) {
 
             $this->preferences->set(
                 $namespace . $field->getField(),
-                $request->get($field->getInputName())
+                $form->getValue($field->getInputName())
             );
         }
     }
