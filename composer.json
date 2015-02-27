@@ -2,6 +2,7 @@
     "name": "anomaly/preferences-module",
     "type": "streams-addon",
     "description": "Preferences management.",
+    "version": "1.0.0-alpha",
     "keywords": [
         "streams-addon",
         "preferences",

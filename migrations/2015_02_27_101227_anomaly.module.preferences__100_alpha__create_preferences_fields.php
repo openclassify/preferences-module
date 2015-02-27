@@ -1,16 +1,15 @@
-<?php namespace Anomaly\PreferencesModule\Installer;
+<?php
 
-use Anomaly\Streams\Platform\Field\FieldInstaller;
+use Anomaly\Streams\Platform\Database\Migration\Migration;
 
 /**
- * Class PreferencesFieldInstaller
+ * Class AnomalyModulePreferences_100_alpha_CreatePreferencesFields
  *
  * @link          http://anomaly.is/streams-platform
  * @author        AnomalyLabs, Inc. <hello@anomaly.is>
  * @author        Ryan Thompson <ryan@anomaly.is>
- * @package       Anomaly\Preferences\Module\Installer
  */
-class PreferencesFieldInstaller extends FieldInstaller
+class AnomalyModulePreferences_100_alpha_CreatePreferencesFields extends Migration
 {
 
     /**
