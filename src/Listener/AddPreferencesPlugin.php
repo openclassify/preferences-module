@@ -4,14 +4,14 @@ use Illuminate\Container\Container;
 use TwigBridge\Bridge;
 
 /**
- * Class AddTwigPlugin
+ * Class AddPreferencesPlugin
  *
  * @link          http://anomaly.is/streams-platform
  * @author        AnomalyLabs, Inc. <hello@anomaly.is>
  * @author        Ryan Thompson <ryan@anomaly.is>
  * @package       Anomaly\PreferencesModule\Command
  */
-class AddTwigPlugin
+class AddPreferencesPlugin
 {
 
     /**
@@ -29,7 +29,7 @@ class AddTwigPlugin
     protected $container;
 
     /**
-     * Create a new AddTwigPlugin instance.
+     * Create a new AddPreferencesPlugin instance.
      *
      * @param Bridge    $twig
      * @param Container $container

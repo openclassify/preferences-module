@@ -20,7 +20,7 @@ class PreferencesModuleEventProvider extends EventServiceProvider
      */
     protected $listen = [
         'Anomaly\Streams\Platform\Application\Event\ApplicationHasBooted' => [
-            'Anomaly\PreferencesModule\Listener\AddTwigPlugin',
+            'Anomaly\PreferencesModule\Listener\AddPreferencesPlugin',
             'Anomaly\PreferencesModule\Listener\SetLocale'
         ]
     ];
