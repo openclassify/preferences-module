@@ -25,7 +25,7 @@ class SetLocale implements SelfHandling
      */
     public function handle(Repository $config, Application $application, PreferenceRepositoryInterface $preferences)
     {
-        $locale = $preferences->get('streams.locale');
+        $locale = $preferences->get('streams::locale');
 
         if ($locale) {
             $config->set('app.locale', $locale);
