@@ -1,5 +1,6 @@
 <?php namespace Anomaly\PreferencesModule\Command;
 
+use Illuminate\Container\Container;
 use Illuminate\Contracts\Bus\SelfHandling;
 use TwigBridge\Bridge;
 
@@ -17,10 +18,11 @@ class AddPreferencesPlugin implements SelfHandling
     /**
      * Handle the command.
      *
-     * @param Bridge $twig
+     * @param Bridge    $twig
+     * @param Container $container
      */
-    public function handle(Bridge $twig)
+    public function handle(Bridge $twig, Container $container)
     {
-        $twig->addExtension('Anomaly\PreferencesModule\PreferencesModulePlugin');
+        $twig->addExtension($container->make('Anomaly\PreferencesModule\PreferencesModulePlugin'));
     }
 }
