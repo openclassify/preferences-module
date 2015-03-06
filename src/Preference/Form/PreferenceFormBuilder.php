@@ -46,13 +46,8 @@ class PreferenceFormBuilder extends FormBuilder
      */
     public function __construct(Form $form)
     {
-        /**
-         * Set these explicitly so extending forms won't
-         * break automation with normal defaulting patterns.
-         */
         $form->setOption('data', 'Anomaly\PreferencesModule\Preference\Form\PreferenceFormData@handle');
         $form->setOption('repository', 'Anomaly\PreferencesModule\Preference\Form\PreferenceFormRepository');
-        $form->setOption('wrapper_view', 'anomaly.module.preferences::admin/preferences/form/wrapper');
 
         parent::__construct($form);
     }

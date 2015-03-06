@@ -84,9 +84,17 @@ class PreferenceRepository implements PreferenceRepositoryInterface
             return $this->config->get($key, $default);
         }
 
-        $field = str_replace('::', '::preferences.', $key);
+        if (!$field = config(str_replace('::', '::preferences/preferences.', $key))) {
+            $field = config(str_replace('::', '::preferences.', $key));
+        }
 
-        $type = app(config($field . '.type', config($field)));
+        if (is_string($field)) {
+            $field = [
+                'type' => $field
+            ];
+        }
+
+        $type = app(array_get($field, 'type'));
 
         $modifier = $type->getModifier();
 
@@ -117,9 +125,17 @@ class PreferenceRepository implements PreferenceRepositoryInterface
             $preference->key = $key;
         }
 
-        $field = str_replace('::', '::preferences.', $key);
+        if (!$field = config(str_replace('::', '::preferences/preferences.', $key))) {
+            $field = config(str_replace('::', '::preferences.', $key));
+        }
 
-        $type = app(config($field . '.type', config($field)));
+        if (is_string($field)) {
+            $field = [
+                'type' => $field
+            ];
+        }
+
+        $type = app(array_get($field, 'type'));
 
         $modifier = $type->getModifier();
 
