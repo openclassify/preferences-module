@@ -20,8 +20,8 @@ class PreferencesController extends AdminController
      * @param PreferenceFormBuilder $form
      * @return \Illuminate\View\View|\Symfony\Component\HttpFoundation\Response
      */
-    public function edit(PreferenceFormBuilder $form, $addon)
+    public function edit(PreferenceFormBuilder $form)
     {
-        return $form->render($addon);
+        return $form->render('streams');
     }
 }

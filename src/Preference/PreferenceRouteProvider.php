@@ -23,13 +23,6 @@ class PreferenceRouteProvider extends RouteServiceProvider
     {
         $router->any(
             'admin/preferences',
-            function () {
-                return redirect('admin/preferences/streams');
-            }
-        );
-
-        $router->any(
-            'admin/preferences/{addon}',
             'Anomaly\PreferencesModule\Http\Controller\Admin\PreferencesController@edit'
         );
     }
