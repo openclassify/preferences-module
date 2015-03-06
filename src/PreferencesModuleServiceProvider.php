@@ -1,5 +1,8 @@
 <?php namespace Anomaly\PreferencesModule;
 
+use Anomaly\PreferencesModule\Command\AddPreferencesPlugin;
+use Anomaly\PreferencesModule\Command\SetLocale;
+use Illuminate\Foundation\Bus\DispatchesCommands;
 use Illuminate\Support\ServiceProvider;
 
 /**
@@ -13,16 +16,15 @@ use Illuminate\Support\ServiceProvider;
 class PreferencesModuleServiceProvider extends ServiceProvider
 {
 
+    use DispatchesCommands;
+
     /**
      * Boot the service provider.
      */
     public function boot()
     {
-        if (app('Anomaly\Streams\Platform\Application\Application')->isInstalled()) {
-            $this->app->make('twig')->addExtension(
-                $this->app->make('\Anomaly\PreferencesModule\PreferencesModulePlugin')
-            );
-        }
+        $this->dispatch(new SetLocale());
+        $this->dispatch(new AddPreferencesPlugin());
     }
 
     /**
