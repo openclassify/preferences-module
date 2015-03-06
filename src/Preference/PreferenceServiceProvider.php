@@ -30,6 +30,7 @@ class PreferenceServiceProvider extends ServiceProvider
             'Anomaly\PreferencesModule\Preference\PreferenceRepository'
         );
 
+        $this->app->register('Anomaly\PreferencesModule\PreferencesModuleEventProvider');
         $this->app->register('Anomaly\PreferencesModule\Preference\PreferenceRouteProvider');
     }
 }

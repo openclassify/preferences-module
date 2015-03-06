@@ -1,8 +1,5 @@
 <?php namespace Anomaly\PreferencesModule;
 
-use Anomaly\PreferencesModule\Command\AddPreferencesPlugin;
-use Anomaly\PreferencesModule\Command\SetLocale;
-use Illuminate\Foundation\Bus\DispatchesCommands;
 use Illuminate\Support\ServiceProvider;
 
 /**
@@ -15,17 +12,6 @@ use Illuminate\Support\ServiceProvider;
  */
 class PreferencesModuleServiceProvider extends ServiceProvider
 {
-
-    use DispatchesCommands;
-
-    /**
-     * Boot the service provider.
-     */
-    public function boot()
-    {
-        $this->dispatch(new SetLocale());
-        $this->dispatch(new AddPreferencesPlugin());
-    }
 
     /**
      * Register the service provider.
