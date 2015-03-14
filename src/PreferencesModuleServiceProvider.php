@@ -1,6 +1,6 @@
 <?php namespace Anomaly\PreferencesModule;
 
-use Illuminate\Support\ServiceProvider;
+use Anomaly\Streams\Platform\Addon\AddonServiceProvider;
 
 /**
  * Class PreferencesModuleServiceProvider
@@ -10,16 +10,28 @@ use Illuminate\Support\ServiceProvider;
  * @author        Ryan Thompson <ryan@anomaly.is>
  * @package       Anomaly\PreferencesModule
  */
-class PreferencesModuleServiceProvider extends ServiceProvider
+class PreferencesModuleServiceProvider extends AddonServiceProvider
 {
 
     /**
-     * Register the service provider.
+     * The addon listeners.
      *
-     * @return void
+     * @var array
      */
-    public function register()
-    {
-        $this->app->register('Anomaly\PreferencesModule\PreferencesModuleRouteProvider');
-    }
+    protected $listeners = [
+        'Anomaly\Streams\Platform\Application\Event\ApplicationHasLoaded' => [
+            'Anomaly\PreferencesModule\Listener\AddPreferencesPlugin',
+            'Anomaly\PreferencesModule\Listener\SetLocale'
+        ]
+    ];
+
+    /**
+     * The addon routes.
+     *
+     * @var array
+     */
+    protected $routes = [
+        'admin/preferences' => 'Anomaly\PreferencesModule\Http\Controller\Admin\PreferencesController@edit'
+    ];
+
 }
