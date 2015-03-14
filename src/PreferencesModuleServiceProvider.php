@@ -20,6 +20,6 @@ class PreferencesModuleServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->register('Anomaly\PreferencesModule\Preference\PreferenceServiceProvider');
+        $this->app->register('Anomaly\PreferencesModule\PreferencesModuleRouteProvider');
     }
 }
