@@ -14,6 +14,24 @@ class PreferencesModuleServiceProvider extends AddonServiceProvider
 {
 
     /**
+     * The class bindings.
+     *
+     * @var array
+     */
+    protected $bindings = [
+        'Anomaly\PreferencesModule\Preference\PreferenceModel' => 'Anomaly\PreferencesModule\Preference\PreferenceModel'
+    ];
+
+    /**
+     * The singleton bindings.
+     *
+     * @var array
+     */
+    protected $singletons = [
+        'Anomaly\PreferencesModule\Preference\Contract\PreferenceRepositoryInterface' => 'Anomaly\PreferencesModule\Preference\PreferenceRepository'
+    ];
+
+    /**
      * The addon listeners.
      *
      * @var array
