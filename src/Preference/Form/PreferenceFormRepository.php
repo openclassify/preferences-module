@@ -1,6 +1,7 @@
 <?php namespace Anomaly\PreferencesModule\Preference\Form;
 
 use Anomaly\PreferencesModule\Preference\Contract\PreferenceRepositoryInterface;
+use Anomaly\Streams\Platform\Addon\FieldType\FieldType;
 use Anomaly\Streams\Platform\Ui\Form\Contract\FormRepositoryInterface;
 use Anomaly\Streams\Platform\Ui\Form\Form;
 use Illuminate\Config\Repository;
@@ -73,8 +74,8 @@ class PreferenceFormRepository implements FormRepositoryInterface
     {
         $namespace = $form->getEntry() . '::';
 
+        /* @var FieldType $field */
         foreach ($form->getFields() as $field) {
-
             $this->preferences->set(
                 $namespace . $field->getField(),
                 $form->getValue($field->getInputName())
