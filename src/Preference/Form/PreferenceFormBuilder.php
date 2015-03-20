@@ -1,6 +1,5 @@
 <?php namespace Anomaly\PreferencesModule\Preference\Form;
 
-use Anomaly\Streams\Platform\Ui\Form\Form;
 use Anomaly\Streams\Platform\Ui\Form\FormBuilder;
 
 /**
@@ -39,16 +38,4 @@ class PreferenceFormBuilder extends FormBuilder
      */
     protected $fields = 'Anomaly\PreferencesModule\Preference\Form\PreferenceFormFields@handle';
 
-    /**
-     * Create a new PreferenceFormBuilder instance.
-     *
-     * @param Form $form
-     */
-    public function __construct(Form $form)
-    {
-        $form->setOption('data', 'Anomaly\PreferencesModule\Preference\Form\PreferenceFormData@handle');
-        $form->setOption('repository', 'Anomaly\PreferencesModule\Preference\Form\PreferenceFormRepository');
-
-        parent::__construct($form);
-    }
 }
