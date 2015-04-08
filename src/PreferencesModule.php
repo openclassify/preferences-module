@@ -14,11 +14,11 @@ class PreferencesModule extends Module
 {
 
     /**
-     * The module navigation.
+     * The module icon.
      *
      * @var string
      */
-    protected $navigation = 'streams::navigation.system';
+    protected $icon = 'glyphicons glyphicons-adjust-alt';
 
     /**
      * The module sections.
