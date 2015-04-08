@@ -3,7 +3,7 @@
 use Anomaly\PreferencesModule\Preference\Contract\PreferenceRepositoryInterface;
 use Anomaly\Streams\Platform\Addon\FieldType\FieldType;
 use Anomaly\Streams\Platform\Ui\Form\Contract\FormRepositoryInterface;
-use Anomaly\Streams\Platform\Ui\Form\Form;
+use Anomaly\Streams\Platform\Ui\Form\FormBuilder;
 use Illuminate\Config\Repository;
 use Illuminate\Container\Container;
 
@@ -67,11 +67,13 @@ class PreferenceFormRepository implements FormRepositoryInterface
     /**
      * Save the form.
      *
-     * @param Form $form
+     * @param FormBuilder $builder
      * @return bool|mixed
      */
-    public function save(Form $form)
+    public function save(FormBuilder $builder)
     {
+        $form = $builder->getForm();
+
         $namespace = $form->getEntry() . '::';
 
         /* @var FieldType $field */
