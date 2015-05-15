@@ -14,7 +14,14 @@ class PreferenceFormBuilder extends FormBuilder
 {
 
     /**
-     * The form actions handler.
+     * The form fields handler.
+     *
+     * @var string
+     */
+    protected $fields = 'Anomaly\PreferencesModule\Preference\Form\PreferenceFormFields@handle';
+
+    /**
+     * The form actions.
      *
      * @var string
      */
@@ -23,7 +30,7 @@ class PreferenceFormBuilder extends FormBuilder
     ];
 
     /**
-     * The form buttons handler.
+     * The form buttons.
      *
      * @var string
      */
@@ -32,10 +39,12 @@ class PreferenceFormBuilder extends FormBuilder
     ];
 
     /**
-     * The form fields handler.
+     * The form options.
      *
-     * @var string
+     * @var array
      */
-    protected $fields = 'Anomaly\PreferencesModule\Preference\Form\PreferenceFormFields@handle';
+    protected $options = [
+        'breadcrumb' => false
+    ];
 
 }
