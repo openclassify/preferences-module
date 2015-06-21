@@ -2,6 +2,7 @@
 
 use Anomaly\PreferencesModule\Preference\Contract\PreferenceInterface;
 use Anomaly\PreferencesModule\Preference\Contract\PreferenceRepositoryInterface;
+use Anomaly\Streams\Platform\Addon\FieldType\FieldType;
 use Anomaly\Streams\Platform\Addon\FieldType\FieldTypeModifier;
 use Illuminate\Auth\Guard;
 use Illuminate\Config\Repository;
@@ -96,10 +97,8 @@ class PreferenceRepository implements PreferenceRepositoryInterface
 
         $type = app(array_get($field, 'type'));
 
-        $modifier = $type->getModifier();
-
-        if ($modifier instanceof FieldTypeModifier) {
-            return $modifier->restore($preference->value);
+        if (!$type instanceof FieldType) {
+            return null;
         }
 
         return $preference->value;
