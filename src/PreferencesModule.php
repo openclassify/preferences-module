@@ -18,7 +18,7 @@ class PreferencesModule extends Module
      *
      * @var string
      */
-    protected $icon = 'glyphicons glyphicons-adjust-alt';
+    protected $icon = 'adjust';
 
     /**
      * The module sections.
