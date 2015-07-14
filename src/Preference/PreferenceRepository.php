@@ -101,7 +101,9 @@ class PreferenceRepository implements PreferenceRepositoryInterface
             return null;
         }
 
-        return $preference->value;
+        $modifier = $type->getModifier();
+
+        return $modifier->restore($preference->value);
     }
 
     /**
