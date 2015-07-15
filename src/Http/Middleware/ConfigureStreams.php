@@ -1,5 +1,6 @@
 <?php namespace Anomaly\PreferencesModule\Http\Middleware;
 
+use Anomaly\PreferencesModule\Http\Middleware\Command\SetDatetime;
 use Anomaly\PreferencesModule\Http\Middleware\Command\SetLocale;
 use Closure;
 use Illuminate\Foundation\Bus\DispatchesCommands;
@@ -29,6 +30,7 @@ class ConfigureStreams
     public function handle(Request $request, Closure $next)
     {
         $this->dispatch(new SetLocale());
+        $this->dispatch(new SetDatetime());
 
         return $next($request);
     }
