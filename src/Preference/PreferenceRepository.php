@@ -1,8 +1,8 @@
 <?php namespace Anomaly\PreferencesModule\Preference;
 
-use Anomaly\PreferencesModule\Preference\Contract\PreferenceInterface;
 use Anomaly\PreferencesModule\Preference\Contract\PreferenceRepositoryInterface;
 use Anomaly\Streams\Platform\Addon\FieldType\FieldType;
+use Anomaly\Streams\Platform\Addon\FieldType\FieldTypeCollection;
 use Anomaly\Streams\Platform\Addon\FieldType\FieldTypeModifier;
 use Illuminate\Auth\Guard;
 use Illuminate\Config\Repository;
@@ -40,34 +40,29 @@ class PreferenceRepository implements PreferenceRepositoryInterface
     protected $config;
 
     /**
+     * The field type collection.
+     *
+     * @var FieldTypeCollection
+     */
+    protected $fieldTypes;
+
+    /**
      * Create a new PreferenceRepositoryInterface instance.
      *
-     * @param PreferenceModel $model
-     * @param Repository      $config
+     * @param FieldTypeCollection $fieldTypes
+     * @param PreferenceModel     $model
+     * @param Repository          $config
+     * @param Guard               $auth
      */
-    public function __construct(PreferenceModel $model, Repository $config, Guard $auth)
-    {
+    public function __construct(
+        FieldTypeCollection $fieldTypes,
+        PreferenceModel $model,
+        Repository $config,
+        Guard $auth
+    ) {
         $this->auth   = $auth;
         $this->model  = $model;
         $this->config = $config;
-    }
-
-    /**
-     * Find a preference by it's key
-     * or return a new instance.
-     *
-     * @param $key
-     * @return PreferenceInterface
-     */
-    public function findOrNew($key)
-    {
-        $preference = $this->model->where('user_id', $this->auth->id())->where('key', $key)->first();
-
-        if (!$preference) {
-            return $this->model->newInstance();
-        }
-
-        return $preference;
     }
 
     /**
@@ -79,12 +74,20 @@ class PreferenceRepository implements PreferenceRepositoryInterface
      */
     public function get($key, $default = null)
     {
+        /**
+         * First get the preference value from
+         * the database or return the default.
+         */
         $preference = $this->model->where('user_id', $this->auth->id())->where('key', $key)->first();
 
         if (!$preference) {
-            return $this->config->get($key, $default);
+            return $default;
         }
 
+        /**
+         * Next try and find the field definition
+         * from the preferences.php configuration file.
+         */
         if (!$field = config(str_replace('::', '::preferences/preferences.', $key))) {
             $field = config(str_replace('::', '::preferences.', $key));
         }
@@ -95,12 +98,22 @@ class PreferenceRepository implements PreferenceRepositoryInterface
             ];
         }
 
-        $type = app(array_get($field, 'type'));
+        /**
+         * Try and get the field type that
+         * the preference uses. If no exists then
+         * just return the value as is.
+         */
+        $type = $this->fieldTypes->get(array_get($field, 'type'));
 
         if (!$type instanceof FieldType) {
-            return null;
+            return $preference->value;
         }
 
+        /**
+         * If the type CAN be determined then
+         * get the modifier and restore the value
+         * before returning it.
+         */
         $modifier = $type->getModifier();
 
         return $modifier->restore($preference->value);
@@ -115,7 +128,15 @@ class PreferenceRepository implements PreferenceRepositoryInterface
      */
     public function set($key, $value)
     {
-        $preference = $this->model->where('user_id', $this->auth->id())->where('key', $key)->first();
+        /**
+         * First get the entry from the database
+         * if one exists. We'll want to set the value
+         * on that rather than a duplicate entry.
+         *
+         * If no entry is found simply spin up a new
+         * instance and use that.
+         */
+        $preference = $this->model->where('key', $key)->first();
 
         if (!$preference) {
 
@@ -126,6 +147,10 @@ class PreferenceRepository implements PreferenceRepositoryInterface
             $preference->key = $key;
         }
 
+        /**
+         * Next try and find the field definition
+         * from the preferences.php configuration file.
+         */
         if (!$field = config(str_replace('::', '::preferences/preferences.', $key))) {
             $field = config(str_replace('::', '::preferences.', $key));
         }
@@ -136,12 +161,22 @@ class PreferenceRepository implements PreferenceRepositoryInterface
             ];
         }
 
-        $type = app(array_get($field, 'type'));
+        /**
+         * Try and get the field type that
+         * the preference uses. If no exists then
+         * just save the value as it is. If a
+         * field type is found then modify the
+         * value for storage in the database.
+         */
+        $type = $this->fieldTypes->get(array_get($field, 'type'));
 
-        $modifier = $type->getModifier();
+        if ($type instanceof FieldType) {
 
-        if ($modifier instanceof FieldTypeModifier) {
-            $value = $modifier->modify($value);
+            $modifier = $type->getModifier();
+
+            if ($modifier instanceof FieldTypeModifier) {
+                $value = $modifier->modify($value);
+            }
         }
 
         $preference->value = $value;
@@ -149,18 +184,5 @@ class PreferenceRepository implements PreferenceRepositoryInterface
         $preference->save();
 
         return $this;
-    }
-
-    /**
-     * Get all preferences for a namespace.
-     *
-     * @param $getNamespace
-     * @return PreferenceCollection
-     */
-    public function getAll($namespace)
-    {
-        $preferences = $this->model->where('key', 'LIKE', $namespace . '::%')->get();
-
-        return new PreferenceCollection($preferences->lists('value', 'key'));
     }
 }

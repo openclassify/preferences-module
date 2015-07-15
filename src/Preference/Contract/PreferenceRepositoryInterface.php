@@ -1,7 +1,5 @@
 <?php namespace Anomaly\PreferencesModule\Preference\Contract;
 
-use Anomaly\PreferencesModule\Preference\PreferenceCollection;
-
 /**
  * Interface PreferenceRepositoryInterface
  *
@@ -12,15 +10,6 @@ use Anomaly\PreferencesModule\Preference\PreferenceCollection;
  */
 interface PreferenceRepositoryInterface
 {
-
-    /**
-     * Find a preference by it's key
-     * or return a new instance.
-     *
-     * @param $key
-     * @return PreferenceInterface
-     */
-    public function findOrNew($key);
 
     /**
      * Get a preference value.
@@ -39,12 +28,4 @@ interface PreferenceRepositoryInterface
      * @return $this
      */
     public function set($key, $value);
-
-    /**
-     * Get all preferences for a namespace.
-     *
-     * @param $getNamespace
-     * @return PreferenceCollection
-     */
-    public function getAll($namespace);
 }
