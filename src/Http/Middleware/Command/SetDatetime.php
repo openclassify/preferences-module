@@ -26,6 +26,7 @@ class SetDatetime implements SelfHandling
         // Set the timezone.
         if ($timezone = $preferences->get('streams::timezone')) {
             $config->set('app.timezone', $timezone);
+            $config->set('streams::datetime.timezone', $timezone);
         }
 
         // Set the date format.
