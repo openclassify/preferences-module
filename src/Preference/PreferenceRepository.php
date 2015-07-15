@@ -60,9 +60,10 @@ class PreferenceRepository implements PreferenceRepositoryInterface
         Repository $config,
         Guard $auth
     ) {
-        $this->auth   = $auth;
-        $this->model  = $model;
-        $this->config = $config;
+        $this->auth       = $auth;
+        $this->model      = $model;
+        $this->config     = $config;
+        $this->fieldTypes = $fieldTypes;
     }
 
     /**
