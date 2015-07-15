@@ -20,6 +20,8 @@ class ConfigureStreams
     use DispatchesCommands;
 
     /**
+     * Configure streams using preference values.
+     *
      * @param Request  $request
      * @param callable $next
      * @return Response
