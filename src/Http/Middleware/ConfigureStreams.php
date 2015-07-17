@@ -3,7 +3,7 @@
 use Anomaly\PreferencesModule\Http\Middleware\Command\SetDatetime;
 use Anomaly\PreferencesModule\Http\Middleware\Command\SetLocale;
 use Closure;
-use Illuminate\Foundation\Bus\DispatchesCommands;
+use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -18,7 +18,7 @@ use Illuminate\Http\Response;
 class ConfigureStreams
 {
 
-    use DispatchesCommands;
+    use DispatchesJobs;
 
     /**
      * Configure streams using preference values.

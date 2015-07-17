@@ -2,7 +2,7 @@
 
 return [
     'name'        => 'Preferences',
-    'description' => 'Preferences management.',
+    'description' => 'A preferences management utility.',
     'section'     => [
         'preferences' => 'System Preferences'
     ]

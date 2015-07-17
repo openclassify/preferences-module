@@ -14,21 +14,12 @@ class PreferencesModuleServiceProvider extends AddonServiceProvider
 {
 
     /**
-     * The class bindings.
+     * The addon middleware.
      *
      * @var array
      */
-    protected $bindings = [
-        'Anomaly\PreferencesModule\Preference\PreferenceModel' => 'Anomaly\PreferencesModule\Preference\PreferenceModel'
-    ];
-
-    /**
-     * The singleton bindings.
-     *
-     * @var array
-     */
-    protected $singletons = [
-        'Anomaly\PreferencesModule\Preference\Contract\PreferenceRepositoryInterface' => 'Anomaly\PreferencesModule\Preference\PreferenceRepository'
+    protected $middleware = [
+        'Anomaly\PreferencesModule\Http\Middleware\ConfigureStreams'
     ];
 
     /**
@@ -41,12 +32,12 @@ class PreferencesModuleServiceProvider extends AddonServiceProvider
     ];
 
     /**
-     * The addon middleware.
+     * The singleton bindings.
      *
      * @var array
      */
-    protected $middleware = [
-        'Anomaly\PreferencesModule\Http\Middleware\ConfigureStreams'
+    protected $singletons = [
+        'Anomaly\PreferencesModule\Preference\Contract\PreferenceRepositoryInterface' => 'Anomaly\PreferencesModule\Preference\PreferenceRepository'
     ];
 
 }

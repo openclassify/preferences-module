@@ -1,9 +1,11 @@
 <?php namespace Anomaly\PreferencesModule\Preference;
 
+use Anomaly\PreferencesModule\Preference\Contract\PreferenceInterface;
 use Anomaly\PreferencesModule\Preference\Contract\PreferenceRepositoryInterface;
 use Anomaly\Streams\Platform\Addon\FieldType\FieldType;
 use Anomaly\Streams\Platform\Addon\FieldType\FieldTypeCollection;
 use Anomaly\Streams\Platform\Addon\FieldType\FieldTypeModifier;
+use Anomaly\Streams\Platform\Entry\EntryRepository;
 use Illuminate\Auth\Guard;
 use Illuminate\Config\Repository;
 
@@ -15,7 +17,7 @@ use Illuminate\Config\Repository;
  * @author        Ryan Thompson <ryan@anomaly.is>
  * @package       Anomaly\PreferencesModule\PreferenceInterface
  */
-class PreferenceRepository implements PreferenceRepositoryInterface
+class PreferenceRepository extends EntryRepository implements PreferenceRepositoryInterface
 {
 
     /**
@@ -78,46 +80,18 @@ class PreferenceRepository implements PreferenceRepositoryInterface
         /**
          * First get the preference value from
          * the database or return the default.
+         *
+         * @var PreferenceInterface $preference
          */
         $preference = $this->model->where('user_id', $this->auth->id())->where('key', $key)->first();
 
         if (!$preference) {
-            return $default;
+            return $this->config->get($key, $default);
+        } else {
+            $value = $preference->getValue();
         }
 
-        /**
-         * Next try and find the field definition
-         * from the preferences.php configuration file.
-         */
-        if (!$field = config(str_replace('::', '::preferences/preferences.', $key))) {
-            $field = config(str_replace('::', '::preferences.', $key));
-        }
-
-        if (is_string($field)) {
-            $field = [
-                'type' => $field
-            ];
-        }
-
-        /**
-         * Try and get the field type that
-         * the preference uses. If no exists then
-         * just return the value as is.
-         */
-        $type = $this->fieldTypes->get(array_get($field, 'type'));
-
-        if (!$type instanceof FieldType) {
-            return $preference->value;
-        }
-
-        /**
-         * If the type CAN be determined then
-         * get the modifier and restore the value
-         * before returning it.
-         */
-        $modifier = $type->getModifier();
-
-        return $modifier->restore($preference->value);
+        return $this->restore($key, $value);
     }
 
     /**
@@ -136,21 +110,20 @@ class PreferenceRepository implements PreferenceRepositoryInterface
          *
          * If no entry is found simply spin up a new
          * instance and use that.
+         *
+         * @var PreferenceInterface $preference
          */
         $preference = $this->model->where('key', $key)->first();
 
-        if (!$preference) {
-
-            $preference = $this->model->newInstance();
-
-            $preference->user_id = $this->auth->id();
-
-            $preference->key = $key;
+        if (!$preference && $preference = $this->model->newInstance()) {
+            $preference
+                ->setKey($key)
+                ->setUser($this->auth->user());
         }
 
         /**
          * Next try and find the field definition
-         * from the preferences.php configuration file.
+         * from the preferences.php preference file.
          */
         if (!$field = config(str_replace('::', '::preferences/preferences.', $key))) {
             $field = config(str_replace('::', '::preferences.', $key));
@@ -180,10 +153,54 @@ class PreferenceRepository implements PreferenceRepositoryInterface
             }
         }
 
-        $preference->value = $value;
+        $preference->setValue($value);
 
-        $preference->save();
+        $this->save($preference);
 
         return $this;
+    }
+
+    /**
+     * Run restore modification on a preference's value.
+     *
+     * @param $key
+     * @param $value
+     * @return mixed
+     */
+    protected function restore($key, $value)
+    {
+        /**
+         * Next try and find the field definition
+         * from the preferences.php preference file.
+         */
+        if (!$field = config(str_replace('::', '::preferences/preferences.', $key))) {
+            $field = config(str_replace('::', '::preferences.', $key));
+        }
+
+        if (is_string($field)) {
+            $field = [
+                'type' => $field
+            ];
+        }
+
+        /**
+         * Try and get the field type that
+         * the preference uses. If no exists then
+         * just return the value as is.
+         */
+        $type = $this->fieldTypes->get(array_get($field, 'type'));
+
+        if (!$type instanceof FieldType) {
+            return $value;
+        }
+
+        /**
+         * If the type CAN be determined then
+         * get the modifier and restore the value
+         * before returning it.
+         */
+        $modifier = $type->getModifier();
+
+        return $modifier->restore($value);
     }
 }

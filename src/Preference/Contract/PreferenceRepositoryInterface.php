@@ -1,5 +1,7 @@
 <?php namespace Anomaly\PreferencesModule\Preference\Contract;
 
+use Anomaly\Streams\Platform\Entry\Contract\EntryRepositoryInterface;
+
 /**
  * Interface PreferenceRepositoryInterface
  *
@@ -8,7 +10,7 @@
  * @author        Ryan Thompson <ryan@anomaly.is>
  * @package       Anomaly\PreferencesModule\PreferenceInterface\Contract
  */
-interface PreferenceRepositoryInterface
+interface PreferenceRepositoryInterface extends EntryRepositoryInterface
 {
 
     /**

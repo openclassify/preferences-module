@@ -2,6 +2,7 @@
 
 use Anomaly\PreferencesModule\Preference\Contract\PreferenceInterface;
 use Anomaly\Streams\Platform\Model\Preferences\PreferencesPreferencesEntryModel;
+use Anomaly\UsersModule\User\Contract\UserInterface;
 
 /**
  * Class PreferenceModel
@@ -21,4 +22,62 @@ class PreferenceModel extends PreferencesPreferencesEntryModel implements Prefer
      */
     protected $cacheMinutes = 99999;
 
+    /**
+     * Set the key.
+     *
+     * @param $key
+     * @return $this
+     */
+    public function setKey($key)
+    {
+        $this->key = $key;
+
+        return $this;
+    }
+
+    /**
+     * Get the user.
+     *
+     * @return UserInterface
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * Set the user.
+     *
+     * @param UserInterface $user
+     * @return $this
+     */
+    public function setUser(UserInterface $user)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get the value.
+     *
+     * @return mixed
+     */
+    public function getValue()
+    {
+        return $this->value;
+    }
+
+    /**
+     * Set the value.
+     *
+     * @param $value
+     * @return $this
+     */
+    public function setValue($value)
+    {
+        $this->value = $value;
+
+        return $this;
+    }
 }

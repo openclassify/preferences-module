@@ -3,38 +3,37 @@
 use Anomaly\Streams\Platform\Database\Migration\Migration;
 
 /**
- * Class AnomalyModulePreferences_100_alpha_CreatePreferencesStreams
+ * Class AnomalyModulePreferences_1_0_0_CreatePreferencesStreams
  *
  * @link          http://anomaly.is/streams-platform
  * @author        AnomalyLabs, Inc. <hello@anomaly.is>
  * @author        Ryan Thompson <ryan@anomaly.is>
  */
-class AnomalyModulePreferences_100_alpha_CreatePreferencesStreams extends Migration
+class AnomalyModulePreferences_1_0_0_CreatePreferencesStreams extends Migration
 {
 
     /**
-     * Stream information.
+     * The stream definition.
      *
      * @var array
      */
     protected $stream = [
-        'slug'   => 'preferences',
-        'locked' => true
+        'slug' => 'preferences'
     ];
 
     /**
-     * Stream field assignments.
+     * The stream assignments.
      *
      * @var array
      */
     protected $assignments = [
-        'user'  => [
+        'user' => [
             'required' => true
         ],
-        'key'   => [
+        'key'  => [
             'required' => true
         ],
-        'value' => []
+        'value'
     ];
 
 }

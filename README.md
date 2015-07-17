@@ -7,4 +7,4 @@
 
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/bebf9ffb-c478-4997-bbfb-57be3ccb9ddd/small.png)](https://insight.sensiolabs.com/projects/bebf9ffb-c478-4997-bbfb-57be3ccb9ddd)
 
-Preferences management.
+A preferences management utility.

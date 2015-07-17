@@ -15,7 +15,7 @@ class PreferencesController extends AdminController
 {
 
     /**
-     * Return a form for editing preferences.
+     * Return the form for editing streams preferences.
      *
      * @param PreferenceFormBuilder $form
      * @return \Illuminate\View\View|\Symfony\Component\HttpFoundation\Response
