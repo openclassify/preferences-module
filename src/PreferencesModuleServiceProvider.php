@@ -14,6 +14,15 @@ class PreferencesModuleServiceProvider extends AddonServiceProvider
 {
 
     /**
+     * The addon plugins.
+     *
+     * @var array
+     */
+    protected $plugins = [
+        'Anomaly\PreferencesModule\PreferencesModulePlugin'
+    ];
+
+    /**
      * The addon middleware.
      *
      * @var array
