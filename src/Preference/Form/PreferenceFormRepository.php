@@ -26,18 +26,18 @@ class PreferenceFormRepository implements FormRepositoryInterface
     protected $config;
 
     /**
-     * The preferences repository.
-     *
-     * @var PreferenceRepositoryInterface
-     */
-    protected $preferences;
-
-    /**
      * The application container.
      *
      * @var Container
      */
     protected $container;
+
+    /**
+     * The preferences repository.
+     *
+     * @var PreferenceRepositoryInterface
+     */
+    protected $preferences;
 
     /**
      * Create a new PreferenceFormRepositoryInterface instance.
