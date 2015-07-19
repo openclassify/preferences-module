@@ -86,7 +86,7 @@ class PreferenceRepository extends EntryRepository implements PreferenceReposito
         $preference = $this->model->where('user_id', $this->auth->id())->where('key', $key)->first();
 
         if (!$preference) {
-            return $this->config->get($key, $default);
+            return $default;
         } else {
             $value = $preference->getValue();
         }
