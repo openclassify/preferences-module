@@ -76,9 +76,15 @@ class PreferenceRepository extends EntryRepository implements PreferenceReposito
      * @param null $default
      * @return mixed
      */
-    public function value($key, $default = null)
+    public function get($key, $default = null)
     {
-        return $this->field($key, $default)->getObject()->getValue();
+        $value = $this->field($key, $default);
+
+        if ($value instanceof FieldTypePresenter) {
+            return $value->getObject()->getValue();
+        }
+
+        return $value;
     }
 
     /**
