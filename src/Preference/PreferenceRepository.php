@@ -5,6 +5,7 @@ use Anomaly\PreferencesModule\Preference\Contract\PreferenceRepositoryInterface;
 use Anomaly\Streams\Platform\Addon\FieldType\FieldType;
 use Anomaly\Streams\Platform\Addon\FieldType\FieldTypeCollection;
 use Anomaly\Streams\Platform\Addon\FieldType\FieldTypeModifier;
+use Anomaly\Streams\Platform\Addon\FieldType\FieldTypePresenter;
 use Anomaly\Streams\Platform\Entry\EntryRepository;
 use Illuminate\Auth\Guard;
 use Illuminate\Config\Repository;
@@ -75,7 +76,19 @@ class PreferenceRepository extends EntryRepository implements PreferenceReposito
      * @param null $default
      * @return mixed
      */
-    public function get($key, $default = null)
+    public function value($key, $default = null)
+    {
+        return $this->field($key, $default)->getObject()->getValue();
+    }
+
+    /**
+     * Get the decorated preference value.
+     *
+     * @param      $key
+     * @param null $default
+     * @return FieldTypePresenter
+     */
+    public function field($key, $default = null)
     {
         /**
          * First get the preference value from
