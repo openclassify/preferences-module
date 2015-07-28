@@ -91,7 +91,43 @@ class PreferenceRepository extends EntryRepository implements PreferenceReposito
             $value = $preference->getValue();
         }
 
-        return $this->restore($key, $value);
+        /**
+         * Next try and find the field definition
+         * from the preferences.php preference file.
+         */
+        if (!$field = config(str_replace('::', '::preferences/preferences.', $key))) {
+            $field = config(str_replace('::', '::preferences.', $key));
+        }
+
+        if (is_string($field)) {
+            $field = [
+                'type' => $field
+            ];
+        }
+
+        /**
+         * Try and get the field type that
+         * the preference uses. If no exists then
+         * just return the value as is.
+         */
+        $type = $this->fieldTypes->get(array_get($field, 'type'));
+
+        if (!$type instanceof FieldType) {
+            return $value;
+        }
+
+        $type->setEntry($preference);
+
+        /**
+         * If the type CAN be determined then
+         * get the modifier and restore the value
+         * before returning it.
+         */
+        $modifier = $type->getModifier();
+
+        $type->setValue($modifier->restore($value));
+
+        return $type->getPresenter();
     }
 
     /**
@@ -158,49 +194,5 @@ class PreferenceRepository extends EntryRepository implements PreferenceReposito
         $this->save($preference);
 
         return $this;
-    }
-
-    /**
-     * Run restore modification on a preference's value.
-     *
-     * @param $key
-     * @param $value
-     * @return mixed
-     */
-    protected function restore($key, $value)
-    {
-        /**
-         * Next try and find the field definition
-         * from the preferences.php preference file.
-         */
-        if (!$field = config(str_replace('::', '::preferences/preferences.', $key))) {
-            $field = config(str_replace('::', '::preferences.', $key));
-        }
-
-        if (is_string($field)) {
-            $field = [
-                'type' => $field
-            ];
-        }
-
-        /**
-         * Try and get the field type that
-         * the preference uses. If no exists then
-         * just return the value as is.
-         */
-        $type = $this->fieldTypes->get(array_get($field, 'type'));
-
-        if (!$type instanceof FieldType) {
-            return $value;
-        }
-
-        /**
-         * If the type CAN be determined then
-         * get the modifier and restore the value
-         * before returning it.
-         */
-        $modifier = $type->getModifier();
-
-        return $modifier->restore($value);
     }
 }
