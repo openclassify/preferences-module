@@ -3,13 +3,13 @@
 use Anomaly\Streams\Platform\Database\Migration\Migration;
 
 /**
- * Class AnomalyModulePreferences_1_0_0_CreatePreferencesStreams
+ * Class AnomalyModulePreferencesCreatePreferencesStreams
  *
  * @link          http://anomaly.is/streams-platform
  * @author        AnomalyLabs, Inc. <hello@anomaly.is>
  * @author        Ryan Thompson <ryan@anomaly.is>
  */
-class AnomalyModulePreferences_1_0_0_CreatePreferencesStreams extends Migration
+class AnomalyModulePreferencesCreatePreferencesStreams extends Migration
 {
 
     /**
