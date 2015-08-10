@@ -23,12 +23,14 @@ class PreferencesModuleServiceProvider extends AddonServiceProvider
     ];
 
     /**
-     * The addon middleware.
+     * The addon listeners.
      *
      * @var array
      */
-    protected $middleware = [
-        'Anomaly\PreferencesModule\Http\Middleware\ConfigureStreams'
+    protected $listeners = [
+        'Anomaly\Streams\Platform\Addon\Event\AddonsRegistered' => [
+            'Anomaly\PreferencesModule\Listener\ConfigureStreams',
+        ]
     ];
 
     /**

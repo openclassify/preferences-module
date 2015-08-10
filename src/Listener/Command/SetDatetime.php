@@ -1,4 +1,4 @@
-<?php namespace Anomaly\PreferencesModule\Http\Middleware\Command;
+<?php namespace Anomaly\PreferencesModule\Listener\Command;
 
 use Anomaly\PreferencesModule\Preference\Contract\PreferenceRepositoryInterface;
 use Illuminate\Config\Repository;
@@ -10,7 +10,7 @@ use Illuminate\Contracts\Bus\SelfHandling;
  * @link          http://anomaly.is/streams-platform
  * @author        AnomalyLabs, Inc. <hello@anomaly.is>
  * @author        Ryan Thompson <ryan@anomaly.is>
- * @package       Anomaly\PreferencesModule\Http\Middleware\Command
+ * @package       Anomaly\PreferencesModule\Listener\Command
  */
 class SetDatetime implements SelfHandling
 {
