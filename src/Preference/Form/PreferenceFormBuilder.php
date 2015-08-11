@@ -14,11 +14,18 @@ class PreferenceFormBuilder extends FormBuilder
 {
 
     /**
+     * No model needed.
+     *
+     * @var bool
+     */
+    protected $model = false;
+
+    /**
      * The form fields handler.
      *
      * @var string
      */
-    protected $fields = 'Anomaly\PreferencesModule\Preference\Form\PreferenceFormFields@handle';
+    protected $fields = PreferenceFormFields::class;
 
     /**
      * The form actions.

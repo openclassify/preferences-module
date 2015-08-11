@@ -2,6 +2,7 @@
 
 use Anomaly\PreferencesModule\Preference\Contract\PreferenceRepositoryInterface;
 use Illuminate\Config\Repository;
+use Illuminate\Contracts\Bus\SelfHandling;
 
 /**
  * Class PreferenceFormFields
@@ -11,7 +12,7 @@ use Illuminate\Config\Repository;
  * @author        Ryan Thompson <ryan@anomaly.is>
  * @package       Anomaly\PreferencesModule\Preference\Form
  */
-class PreferenceFormFields
+class PreferenceFormFields implements SelfHandling
 {
 
     /**
