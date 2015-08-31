@@ -28,7 +28,7 @@ class PreferencesModuleServiceProvider extends AddonServiceProvider
      * @var array
      */
     protected $listeners = [
-        'Anomaly\Streams\Platform\Addon\Event\AddonsRegistered' => [
+        'Anomaly\Streams\Platform\Addon\Event\AddonsHaveRegistered' => [
             'Anomaly\PreferencesModule\Listener\ConfigureStreams',
         ]
     ];
