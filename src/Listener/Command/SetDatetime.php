@@ -25,18 +25,18 @@ class SetDatetime implements SelfHandling
     {
         // Set the timezone.
         if ($timezone = $preferences->get('streams::timezone')) {
-            $config->set('app.timezone', $timezone);
-            $config->set('streams::datetime.timezone', $timezone);
+            $config->set('app.timezone', $timezone->getValue());
+            $config->set('streams::datetime.timezone', $timezone->getValue());
         }
 
         // Set the date format.
         if ($format = $preferences->get('streams::date_format')) {
-            $config->set('streams::datetime.date_format', $format);
+            $config->set('streams::datetime.date_format', $format->getValue());
         }
 
         // Set the time format.
         if ($format = $preferences->get('streams::time_format')) {
-            $config->set('streams::datetime.time_format', $format);
+            $config->set('streams::datetime.time_format', $format->getValue());
         }
     }
 }

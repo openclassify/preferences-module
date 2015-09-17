@@ -78,10 +78,11 @@ class PreferenceFormRepository implements FormRepositoryInterface
 
         /* @var FieldType $field */
         foreach ($form->getFields() as $field) {
-            $this->preferences->set(
-                $namespace . $field->getField(),
-                $form->getValue($field->getInputName())
-            );
+
+            $key   = $namespace . $field->getField();
+            $value = $form->getValue($field->getInputName());
+
+            $this->preferences->set($key, $value);
         }
     }
 }

@@ -2,13 +2,10 @@
 
 use Anomaly\PreferencesModule\Preference\Contract\PreferenceInterface;
 use Anomaly\PreferencesModule\Preference\Contract\PreferenceRepositoryInterface;
-use Anomaly\Streams\Platform\Addon\FieldType\FieldType;
-use Anomaly\Streams\Platform\Addon\FieldType\FieldTypeCollection;
-use Anomaly\Streams\Platform\Addon\FieldType\FieldTypeModifier;
 use Anomaly\Streams\Platform\Addon\FieldType\FieldTypePresenter;
 use Anomaly\Streams\Platform\Entry\EntryRepository;
+use Anomaly\UsersModule\User\Contract\UserInterface;
 use Illuminate\Auth\Guard;
-use Illuminate\Config\Repository;
 
 /**
  * Class PreferenceRepositoryInterface
@@ -36,184 +33,97 @@ class PreferenceRepository extends EntryRepository implements PreferenceReposito
     protected $model;
 
     /**
-     * The config repository.
+     * The preferences collection.
      *
-     * @var Repository
+     * @var PreferenceCollection
      */
-    protected $config;
-
-    /**
-     * The field type collection.
-     *
-     * @var FieldTypeCollection
-     */
-    protected $fieldTypes;
+    protected $preferences;
 
     /**
      * Create a new PreferenceRepositoryInterface instance.
      *
-     * @param FieldTypeCollection $fieldTypes
-     * @param PreferenceModel     $model
-     * @param Repository          $config
-     * @param Guard               $auth
+     * @param Guard           $auth
+     * @param PreferenceModel $model
+     * @internal param Repository $config
+     * @internal param FieldTypeCollection $fieldTypes
      */
-    public function __construct(
-        FieldTypeCollection $fieldTypes,
-        PreferenceModel $model,
-        Repository $config,
-        Guard $auth
-    ) {
-        $this->auth       = $auth;
-        $this->model      = $model;
-        $this->config     = $config;
-        $this->fieldTypes = $fieldTypes;
-    }
-
-    /**
-     * Get a preference value.
-     *
-     * @param      $key
-     * @param null $default
-     * @return mixed
-     */
-    public function get($key, $default = null)
+    public function __construct(Guard $auth, PreferenceModel $model)
     {
-        $value = $this->field($key, $default);
+        $this->auth  = $auth;
+        $this->model = $model;
 
-        if ($value instanceof FieldTypePresenter) {
-            return $value->getObject()->getValue();
-        }
-
-        return $value;
+        $this->preferences = $this->model->all();
     }
 
     /**
-     * Get the decorated preference value.
+     * Get a preference.
      *
-     * @param      $key
-     * @param null $default
-     * @return FieldTypePresenter
+     * @param $key
+     * @return null|PreferenceInterface
      */
-    public function field($key, $default = null)
+    public function get($key)
     {
-        /**
-         * First get the preference value from
-         * the database or return the default.
-         *
-         * @var PreferenceInterface $preference
-         */
-        $preference = $this->model->where('user_id', $this->auth->id())->where('key', $key)->first();
-
-        if (!$preference) {
-            return $default;
-        } else {
-            $value = $preference->getValue();
-        }
-
-        /**
-         * Next try and find the field definition
-         * from the preferences.php preference file.
-         */
-        if (!$field = config(str_replace('::', '::preferences/preferences.', $key))) {
-            $field = config(str_replace('::', '::preferences.', $key));
-        }
-
-        if (is_string($field)) {
-            $field = [
-                'type' => $field
-            ];
-        }
-
-        /**
-         * Try and get the field type that
-         * the preference uses. If no exists then
-         * just return the value as is.
-         */
-        $type = $this->fieldTypes->get(array_get($field, 'type'));
-
-        if (!$type instanceof FieldType) {
-            return $value;
-        }
-
-        $type->setEntry($preference);
-        $type->mergeRules(array_get($field, 'rules', []));
-        $type->mergeConfig(array_get($field, 'config', []));
-
-        /**
-         * If the type CAN be determined then
-         * get the modifier and restore the value
-         * before returning it.
-         */
-        $modifier = $type->getModifier();
-
-        $type->setValue($modifier->restore($value));
-
-        return $type->getPresenter();
+        return $this->preferences->get($key);
     }
 
     /**
-     * Set a preference value.
+     * Set a preferences value.
      *
      * @param $key
      * @param $value
-     * @return $this
+     * @return bool
      */
     public function set($key, $value)
     {
-        /**
-         * First get the entry from the database
-         * if one exists. We'll want to set the value
-         * on that rather than a duplicate entry.
-         *
-         * If no entry is found simply spin up a new
-         * instance and use that.
-         *
-         * @var PreferenceInterface $preference
-         */
-        $preference = $this->model->where('key', $key)->first();
-
-        if (!$preference && $preference = $this->model->newInstance()) {
-            $preference
-                ->setKey($key)
-                ->setUser($this->auth->user());
+        if (!$user = $this->auth->getUser()) {
+            throw new \Exception('The user could not be determined.');
         }
 
-        /**
-         * Next try and find the field definition
-         * from the preferences.php preference file.
-         */
-        if (!$field = config(str_replace('::', '::preferences/preferences.', $key))) {
-            $field = config(str_replace('::', '::preferences.', $key));
-        }
+        $preference = $this->findByKeyOrNew($key);
 
-        if (is_string($field)) {
-            $field = [
-                'type' => $field
-            ];
-        }
-
-        /**
-         * Try and get the field type that
-         * the preference uses. If no exists then
-         * just save the value as it is. If a
-         * field type is found then modify the
-         * value for storage in the database.
-         */
-        $type = $this->fieldTypes->get(array_get($field, 'type'));
-
-        if ($type instanceof FieldType) {
-
-            $modifier = $type->getModifier();
-
-            if ($modifier instanceof FieldTypeModifier) {
-                $value = $modifier->modify($value);
-            }
-        }
-
+        $preference->setUser($user);
         $preference->setValue($value);
 
-        $this->save($preference);
+        return $this->save($preference);
+    }
 
-        return $this;
+    /**
+     * Get a preference value presenter instance.
+     *
+     * @param $key
+     * @return null|FieldTypePresenter
+     */
+    public function value($key)
+    {
+        if ($preference = $this->get($key)) {
+            return $preference->value();
+        }
+
+        return null;
+    }
+
+    /**
+     * Find a preference by it's key
+     * or return a new instance.
+     *
+     * @param $key
+     * @return PreferenceInterface
+     */
+    public function findByKeyOrNew($key)
+    {
+        /* @var UserInterface $user */
+        if (!$user = $this->auth->getUser()) {
+            throw new \Exception('The user could not be determined.');
+        }
+
+        if (!$preference = $this->model->where('key', $key)->where('key', $user->getId())->first()) {
+
+            $preference = $this->model->newInstance();
+
+            $preference->setKey($key);
+            $preference->setUser($user);
+        }
+
+        return $preference;
     }
 }

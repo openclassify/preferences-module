@@ -1,7 +1,7 @@
 {
     "name": "anomaly/preferences-module",
     "type": "streams-addon",
-    "description": "A preferences management utility.",
+    "description": "System preferences management for the Streams Platform.",
     "keywords": [
         "streams module",
         "streams addon",
@@ -23,11 +23,6 @@
     "autoload": {
         "psr-4": {
             "Anomaly\\PreferencesModule\\": "src/"
-        }
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-1.0/master": "1.0.x-dev"
         }
     }
 }

@@ -1,28 +1,28 @@
-<?php namespace Anomaly\PreferencesModule\Preference;
+<?php namespace Anomaly\PreferencesModule;
 
 use Anomaly\PreferencesModule\Preference\Contract\PreferenceRepositoryInterface;
 use Anomaly\Streams\Platform\Addon\Plugin\Plugin;
 
 /**
- * Class PreferencePlugin
+ * Class PreferencesModulePlugin
  *
  * @link          http://anomaly.is/streams-platform
  * @author        AnomalyLabs, Inc. <hello@anomaly.is>
  * @author        Ryan Thompson <ryan@anomaly.is>
- * @package       Anomaly\PreferencesModule\Preference
+ * @package       Anomaly\PreferencesModule
  */
-class PreferencePlugin extends Plugin
+class PreferencesModulePlugin extends Plugin
 {
 
     /**
-     * The preferences repository.
+     * The preference repository.
      *
      * @var PreferenceRepositoryInterface
      */
     protected $preferences;
 
     /**
-     * Create a new PreferencesPlugin instance.
+     * Create a new PreferencesModulePlugin instance.
      *
      * @param PreferenceRepositoryInterface $preferences
      */
@@ -39,7 +39,8 @@ class PreferencePlugin extends Plugin
     public function getFunctions()
     {
         return [
-            new \Twig_SimpleFunction('preferences_get', [$this->preferences, 'get'])
+            new \Twig_SimpleFunction('preferences_get', [$this->preferences, 'get']),
+            new \Twig_SimpleFunction('preferences_value', [$this->preferences, 'value'])
         ];
     }
 }

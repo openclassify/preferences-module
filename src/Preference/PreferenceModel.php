@@ -1,6 +1,11 @@
 <?php namespace Anomaly\PreferencesModule\Preference;
 
+use Anomaly\PreferencesModule\Preference\Command\GetValueFieldType;
+use Anomaly\PreferencesModule\Preference\Command\ModifyValue;
 use Anomaly\PreferencesModule\Preference\Contract\PreferenceInterface;
+use Anomaly\SettingsModule\Setting\Command\GetValuePresenter;
+use Anomaly\Streams\Platform\Addon\FieldType\FieldType;
+use Anomaly\Streams\Platform\Addon\FieldType\FieldTypePresenter;
 use Anomaly\Streams\Platform\Model\Preferences\PreferencesPreferencesEntryModel;
 use Anomaly\UsersModule\User\Contract\UserInterface;
 
@@ -79,5 +84,42 @@ class PreferenceModel extends PreferencesPreferencesEntryModel implements Prefer
         $this->value = $value;
 
         return $this;
+    }
+
+    /**
+     * Set the value.
+     *
+     * @param $value
+     * @return $this
+     */
+    protected function setValueAttribute($value)
+    {
+        $this->attributes['value'] = $this->dispatch(new ModifyValue($this, $value));
+
+        return $this;
+    }
+
+    /**
+     * Get the value attribute.
+     *
+     * @return mixed
+     */
+    protected function getValueAttribute()
+    {
+        /* @var FieldType $type */
+        $type = $this->dispatch(new GetValueFieldType($this));
+
+        return $type->getValue();
+    }
+
+    /**
+     * Return the related value
+     * field type presenter.
+     *
+     * @return FieldTypePresenter
+     */
+    public function value()
+    {
+        return $this->dispatch(new GetValuePresenter($this));
     }
 }
