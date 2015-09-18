@@ -95,7 +95,12 @@ class PreferenceFormFields implements SelfHandling
             );
 
             // Get the value defaulting to the default value.
-            $field['value'] = $preferences->get($namespace . $slug, array_get($field['config'], 'default_value'));
+
+            if ($preference = $preferences->get($namespace . $slug)) {
+                $field['value'] = $preference->getValue();
+            } else {
+                $field['value'] = array_get($field['config'], 'default_value');
+            }
         }
 
         $builder->setFields($fields);

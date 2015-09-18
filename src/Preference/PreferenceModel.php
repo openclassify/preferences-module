@@ -8,9 +8,12 @@ use Anomaly\Streams\Platform\Addon\FieldType\FieldType;
 use Anomaly\Streams\Platform\Addon\FieldType\FieldTypePresenter;
 use Anomaly\Streams\Platform\Model\Preferences\PreferencesPreferencesEntryModel;
 use Anomaly\UsersModule\User\Contract\UserInterface;
+use Illuminate\Database\Eloquent\Builder;
 
 /**
  * Class PreferenceModel
+ *
+ * @method Builder belongingToUser(UserInterface $user)
  *
  * @link          http://anomaly.is/streams-platform
  * @author        AnomalyLabs, Inc. <hello@anomaly.is>
@@ -26,6 +29,27 @@ class PreferenceModel extends PreferencesPreferencesEntryModel implements Prefer
      * @var int
      */
     protected $cacheMinutes = 99999;
+
+    /**
+     * Limit to preferences belonging to the provided user.
+     *
+     * @param Builder       $query
+     * @param UserInterface $user
+     */
+    public function scopeBelongingToUser(Builder $query, UserInterface $user)
+    {
+        $query->where('user_id', $user->getId());
+    }
+
+    /**
+     * Get the key.
+     *
+     * @return string
+     */
+    public function getKey()
+    {
+        return $this->key;
+    }
 
     /**
      * Set the key.

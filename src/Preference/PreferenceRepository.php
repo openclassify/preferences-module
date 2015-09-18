@@ -44,15 +44,17 @@ class PreferenceRepository extends EntryRepository implements PreferenceReposito
      *
      * @param Guard           $auth
      * @param PreferenceModel $model
-     * @internal param Repository $config
-     * @internal param FieldTypeCollection $fieldTypes
      */
     public function __construct(Guard $auth, PreferenceModel $model)
     {
         $this->auth  = $auth;
         $this->model = $model;
 
-        $this->preferences = $this->model->all();
+        $this->preferences = new PreferenceCollection();
+
+        if ($user = $this->auth->user()) {
+            $this->preferences = $this->model->belongingToUser($auth->getUser())->get();
+        }
     }
 
     /**
@@ -116,7 +118,7 @@ class PreferenceRepository extends EntryRepository implements PreferenceReposito
             throw new \Exception('The user could not be determined.');
         }
 
-        if (!$preference = $this->model->where('key', $key)->where('key', $user->getId())->first()) {
+        if (!$preference = $this->model->where('key', $key)->where('user_id', $user->getId())->first()) {
 
             $preference = $this->model->newInstance();
 

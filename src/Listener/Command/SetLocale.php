@@ -29,13 +29,13 @@ class SetLocale implements SelfHandling
     {
         // Set using admin locale if in admin.
         if ($request->segment(1) === 'admin' && $locale = $preferences->get('streams::admin_locale')) {
-            $app->setLocale($locale);
+            $app->setLocale($locale->getValue());
             $config->set('app.locale', $locale->getValue());
         }
 
         // Set using public locale if NOT in admin.
         if ($request->segment(1) !== 'admin' && $locale = $preferences->get('streams::public_locale')) {
-            $app->setLocale($locale);
+            $app->setLocale($locale->getValue());
             $config->set('app.locale', $locale->getValue());
         }
     }
