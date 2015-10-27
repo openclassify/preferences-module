@@ -3,7 +3,7 @@
 use Anomaly\PreferencesModule\Preference\Command\GetValueFieldType;
 use Anomaly\PreferencesModule\Preference\Command\ModifyValue;
 use Anomaly\PreferencesModule\Preference\Contract\PreferenceInterface;
-use Anomaly\SettingsModule\Setting\Command\GetValuePresenter;
+use Anomaly\PreferencesModule\Preference\Command\GetValuePresenter;
 use Anomaly\Streams\Platform\Addon\FieldType\FieldType;
 use Anomaly\Streams\Platform\Addon\FieldType\FieldTypePresenter;
 use Anomaly\Streams\Platform\Model\Preferences\PreferencesPreferencesEntryModel;

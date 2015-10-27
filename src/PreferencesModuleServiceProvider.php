@@ -19,7 +19,7 @@ class PreferencesModuleServiceProvider extends AddonServiceProvider
      * @var array
      */
     protected $plugins = [
-        'Anomaly\PreferencesModule\PreferencesModulePlugin'
+        'Anomaly\PreferencesModule\Preference\Plugin\PreferencePlugin'
     ];
 
     /**
