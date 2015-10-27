@@ -36,10 +36,9 @@ class GetPreference implements SelfHandling
      * Handle the command.
      *
      * @param PreferenceRepositoryInterface $preferences
-     * @param Decorator                     $decorator
      * @return mixed
      */
-    public function handle(PreferenceRepositoryInterface $preferences, Decorator $decorator)
+    public function handle(PreferenceRepositoryInterface $preferences)
     {
         return $preferences->value($this->key);
     }
