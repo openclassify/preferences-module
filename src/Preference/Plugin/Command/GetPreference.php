@@ -1,7 +1,6 @@
 <?php namespace Anomaly\PreferencesModule\Preference\Plugin\Command;
 
 use Anomaly\PreferencesModule\Preference\Contract\PreferenceRepositoryInterface;
-use Anomaly\Streams\Platform\Support\Decorator;
 use Illuminate\Contracts\Bus\SelfHandling;
 
 /**

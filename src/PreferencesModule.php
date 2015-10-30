@@ -26,7 +26,11 @@ class PreferencesModule extends Module
      * @var array
      */
     protected $sections = [
-        'preferences'
+        'system',
+        'modules',
+        'extensions',
+        'field_types',
+        'plugins'
     ];
 
 }

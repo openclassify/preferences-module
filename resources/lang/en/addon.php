@@ -5,6 +5,10 @@ return [
     'name'        => 'Preferences Module',
     'description' => 'A preferences management utility.',
     'section'     => [
-        'preferences' => 'System Preferences'
+        'system'      => 'System',
+        'plugins'     => 'Plugins',
+        'modules'     => 'Modules',
+        'extensions'  => 'Extensions',
+        'field_types' => 'Field Types'
     ]
 ];

@@ -4,21 +4,21 @@ use Anomaly\PreferencesModule\Preference\Form\PreferenceFormBuilder;
 use Anomaly\Streams\Platform\Http\Controller\AdminController;
 
 /**
- * Class PreferencesController
+ * Class SystemController
  *
  * @link          http://anomaly.is/streams-platform
  * @author        AnomalyLabs, Inc. <hello@anomaly.is>
  * @author        Ryan Thompson <ryan@anomaly.is>
  * @package       Anomaly\PreferencesModule\Http\Controller\Admin
  */
-class PreferencesController extends AdminController
+class SystemController extends AdminController
 {
 
     /**
-     * Return the form for editing streams preferences.
+     * Return the form for editing preferences.
      *
      * @param PreferenceFormBuilder $form
-     * @return \Illuminate\View\View|\Symfony\Component\HttpFoundation\Response
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function edit(PreferenceFormBuilder $form)
     {

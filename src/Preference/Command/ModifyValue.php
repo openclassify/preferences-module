@@ -2,7 +2,6 @@
 
 use Anomaly\PreferencesModule\Preference\Contract\PreferenceInterface;
 use Anomaly\Streams\Platform\Addon\FieldType\FieldType;
-use Anomaly\Streams\Platform\Addon\FieldType\FieldTypeCollection;
 use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 
@@ -37,11 +36,11 @@ class ModifyValue implements SelfHandling
      * Create a new ModifyValue instance.
      *
      * @param PreferenceInterface $preference
-     * @param                  $value
+     * @param                     $value
      */
     function __construct(PreferenceInterface $preference, $value)
     {
-        $this->value   = $value;
+        $this->value      = $value;
         $this->preference = $preference;
     }
 
