@@ -20,9 +20,9 @@ class SetLocale implements SelfHandling
     /**
      * Handle the command.
      *
-     * @param Application                   $app
-     * @param Repository                    $config
-     * @param Request                       $request
+     * @param Application $app
+     * @param Repository $config
+     * @param Request $request
      * @param PreferenceRepositoryInterface $preferences
      */
     function handle(Application $app, Repository $config, Request $request, PreferenceRepositoryInterface $preferences)
@@ -34,7 +34,10 @@ class SetLocale implements SelfHandling
         }
 
         // Set using public locale if NOT in admin.
-        if ($request->segment(1) !== 'admin' && $locale = $preferences->get('streams::public_locale')) {
+        if (!defined('LOCALE') && $request->segment(1) !== 'admin' && $locale = $preferences->get(
+                'streams::public_locale'
+            )
+        ) {
             $app->setLocale($locale->getValue());
             $config->set('app.locale', $locale->getValue());
         }
