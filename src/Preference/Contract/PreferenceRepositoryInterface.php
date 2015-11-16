@@ -1,5 +1,6 @@
 <?php namespace Anomaly\PreferencesModule\Preference\Contract;
 
+use Anomaly\PreferencesModule\Preference\PreferenceCollection;
 use Anomaly\PreferencesModule\Preference\PreferenceModel;
 use Anomaly\Streams\Platform\Addon\FieldType\FieldTypePresenter;
 use Anomaly\Streams\Platform\Entry\Contract\EntryRepositoryInterface;
@@ -48,4 +49,12 @@ interface PreferenceRepositoryInterface extends EntryRepositoryInterface
      * @return PreferenceInterface
      */
     public function findByKeyOrNew($key);
+
+    /**
+     * Find all preferences with namespace.
+     *
+     * @param $namespace
+     * @return PreferenceCollection
+     */
+    public function findAllByNamespace($namespace);
 }

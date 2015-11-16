@@ -128,4 +128,15 @@ class PreferenceRepository extends EntryRepository implements PreferenceReposito
 
         return $preference;
     }
+
+    /**
+     * Find all preferences with namespace.
+     *
+     * @param $namespace
+     * @return PreferenceCollection
+     */
+    public function findAllByNamespace($namespace)
+    {
+        return $this->model->where('key', 'LIKE', $namespace . '%')->get();
+    }
 }
