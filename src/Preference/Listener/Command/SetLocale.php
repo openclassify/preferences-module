@@ -1,4 +1,4 @@
-<?php namespace Anomaly\PreferencesModule\Listener\Command;
+<?php namespace Anomaly\PreferencesModule\Preference\Listener\Command;
 
 use Anomaly\PreferencesModule\Preference\Contract\PreferenceRepositoryInterface;
 use Illuminate\Config\Repository;
@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
  * @link          http://anomaly.is/streams-platform
  * @author        AnomalyLabs, Inc. <hello@anomaly.is>
  * @author        Ryan Thompson <ryan@anomaly.is>
- * @package       Anomaly\PreferencesModule\Listener\Command
+ * @package       Anomaly\PreferencesModule\Preference\Listener\Command
  */
 class SetLocale implements SelfHandling
 {
@@ -20,9 +20,9 @@ class SetLocale implements SelfHandling
     /**
      * Handle the command.
      *
-     * @param Application $app
-     * @param Repository $config
-     * @param Request $request
+     * @param Application                   $app
+     * @param Repository                    $config
+     * @param Request                       $request
      * @param PreferenceRepositoryInterface $preferences
      */
     function handle(Application $app, Repository $config, Request $request, PreferenceRepositoryInterface $preferences)

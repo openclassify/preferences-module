@@ -1,7 +1,7 @@
-<?php namespace Anomaly\PreferencesModule\Listener;
+<?php namespace Anomaly\PreferencesModule\Preference\Listener;
 
-use Anomaly\PreferencesModule\Listener\Command\SetDatetime;
-use Anomaly\PreferencesModule\Listener\Command\SetLocale;
+use Anomaly\PreferencesModule\Preference\Listener\Command\SetDatetime;
+use Anomaly\PreferencesModule\Preference\Listener\Command\SetLocale;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 
 /**
@@ -10,7 +10,7 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
  * @link          http://anomaly.is/streams-platform
  * @author        AnomalyLabs, Inc. <hello@anomaly.is>
  * @author        Ryan Thompson <ryan@anomaly.is>
- * @package       Anomaly\PreferencesModule\Listener
+ * @package       Anomaly\PreferencesModule\Preference\Listener
  */
 class ConfigureStreams
 {
