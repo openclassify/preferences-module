@@ -29,7 +29,7 @@ class PreferencesModuleServiceProvider extends AddonServiceProvider
      */
     protected $listeners = [
         'Anomaly\Streams\Platform\Event\Response' => [
-            'Anomaly\PreferencesModule\Listener\ConfigureStreams'
+            'Anomaly\PreferencesModule\Preference\Listener\ConfigureStreams'
         ]
     ];
 
