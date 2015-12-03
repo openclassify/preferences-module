@@ -59,12 +59,4 @@ interface PreferenceInterface extends EntryInterface
      * @return $this
      */
     public function setValue($value);
-
-    /**
-     * Return the related value
-     * field type presenter.
-     *
-     * @return FieldTypePresenter
-     */
-    public function value();
 }

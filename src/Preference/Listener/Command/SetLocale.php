@@ -28,18 +28,18 @@ class SetLocale implements SelfHandling
     function handle(Application $app, Repository $config, Request $request, PreferenceRepositoryInterface $preferences)
     {
         // Set using admin locale if in admin.
-        if ($request->segment(1) === 'admin' && $locale = $preferences->get('streams::admin_locale')) {
-            $app->setLocale($locale->getValue());
-            $config->set('app.locale', $locale->getValue());
+        if ($request->segment(1) === 'admin' && $locale = $preferences->value('streams::admin_locale')) {
+            $app->setLocale($locale);
+            $config->set('app.locale', $locale);
         }
 
         // Set using public locale if NOT in admin.
-        if (!defined('LOCALE') && $request->segment(1) !== 'admin' && $locale = $preferences->get(
+        if (!defined('LOCALE') && $request->segment(1) !== 'admin' && $locale = $preferences->value(
                 'streams::public_locale'
             )
         ) {
-            $app->setLocale($locale->getValue());
-            $config->set('app.locale', $locale->getValue());
+            $app->setLocale($locale);
+            $config->set('app.locale', $locale);
         }
     }
 }

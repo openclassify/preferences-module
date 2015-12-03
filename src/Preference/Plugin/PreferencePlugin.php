@@ -1,6 +1,7 @@
 <?php namespace Anomaly\PreferencesModule\Preference\Plugin;
 
 use Anomaly\PreferencesModule\Preference\Plugin\Command\GetPreference;
+use Anomaly\PreferencesModule\Preference\Plugin\Command\GetPreferenceValue;
 use Anomaly\Streams\Platform\Addon\Plugin\Plugin;
 
 /**
@@ -26,6 +27,12 @@ class PreferencePlugin extends Plugin
                 'preference',
                 function ($key) {
                     return $this->dispatch(new GetPreference($key));
+                }
+            ),
+            new \Twig_SimpleFunction(
+                'preference_value',
+                function ($key) {
+                    return $this->dispatch(new GetPreferenceValue($key));
                 }
             )
         ];

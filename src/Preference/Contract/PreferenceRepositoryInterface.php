@@ -36,10 +36,20 @@ interface PreferenceRepositoryInterface extends EntryRepositoryInterface
     /**
      * Get a preference value presenter instance.
      *
-     * @param $key
-     * @return null|FieldTypePresenter
+     * @param      $key
+     * @param null $default
+     * @return FieldTypePresenter|null
      */
-    public function value($key);
+    public function value($key, $default = null);
+
+    /**
+     * Return the field type
+     * presenter for a setting.
+     *
+     * @param $key
+     * @return FieldTypePresenter|null
+     */
+    public function presenter($key);
 
     /**
      * Find a preference by it's key
