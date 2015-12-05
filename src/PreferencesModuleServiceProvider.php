@@ -19,7 +19,7 @@ class PreferencesModuleServiceProvider extends AddonServiceProvider
      * @var array
      */
     protected $plugins = [
-        'Anomaly\PreferencesModule\Preference\Plugin\PreferencePlugin'
+        'Anomaly\PreferencesModule\PreferencesModulePlugin'
     ];
 
     /**
@@ -42,6 +42,15 @@ class PreferencesModuleServiceProvider extends AddonServiceProvider
         'admin/preferences'                => 'Anomaly\PreferencesModule\Http\Controller\Admin\SystemController@edit',
         'admin/preferences/{type}'         => 'Anomaly\PreferencesModule\Http\Controller\Admin\AddonsController@index',
         'admin/preferences/{type}/{addon}' => 'Anomaly\PreferencesModule\Http\Controller\Admin\AddonsController@edit'
+    ];
+
+    /**
+     * The class bindings.
+     *
+     * @var array
+     */
+    protected $bindings = [
+        'Anomaly\Streams\Platform\Model\Preferences\PreferencesPreferencesEntryModel' => 'Anomaly\PreferencesModule\Preference\PreferenceModel'
     ];
 
     /**

@@ -1,17 +1,17 @@
-<?php namespace Anomaly\PreferencesModule\Preference\Plugin\Command;
+<?php namespace Anomaly\PreferencesModule\Preference\Command;
 
 use Anomaly\PreferencesModule\Preference\Contract\PreferenceRepositoryInterface;
 use Illuminate\Contracts\Bus\SelfHandling;
 
 /**
- * Class GetPreference
+ * Class GetPreferenceValue
  *
  * @link          http://anomaly.is/streams-platform
  * @author        AnomalyLabs, Inc. <hello@anomaly.is>
  * @author        Ryan Thompson <ryan@anomaly.is>
- * @package       Anomaly\PreferencesModule\Preference\Plugin\Command
+ * @package       Anomaly\PreferencesModule\Preference\Command
  */
-class GetPreference implements SelfHandling
+class GetPreferenceValue implements SelfHandling
 {
 
     /**
@@ -22,13 +22,22 @@ class GetPreference implements SelfHandling
     protected $key;
 
     /**
-     * Create a new GetPreference instance.
+     * The default value.
      *
-     * @param $key
+     * @var mixed
      */
-    public function __construct($key)
+    protected $default;
+
+    /**
+     * Create a new GetPreferenceValue instance.
+     *
+     * @param      $key
+     * @param null $default
+     */
+    public function __construct($key, $default = null)
     {
-        $this->key = $key;
+        $this->key     = $key;
+        $this->default = $default;
     }
 
     /**
@@ -39,6 +48,6 @@ class GetPreference implements SelfHandling
      */
     public function handle(PreferenceRepositoryInterface $preferences)
     {
-        return $preferences->value($this->key);
+        return $preferences->value($this->key, $this->default);
     }
 }
