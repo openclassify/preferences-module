@@ -28,24 +28,6 @@ class PreferenceFormBuilder extends FormBuilder
     protected $fields = PreferenceFormFields::class;
 
     /**
-     * The form actions.
-     *
-     * @var string
-     */
-    protected $actions = [
-        'save'
-    ];
-
-    /**
-     * The form buttons.
-     *
-     * @var string
-     */
-    protected $buttons = [
-        'cancel'
-    ];
-
-    /**
      * The form options.
      *
      * @var array
