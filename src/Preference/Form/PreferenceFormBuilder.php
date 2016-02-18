@@ -28,6 +28,15 @@ class PreferenceFormBuilder extends FormBuilder
     protected $fields = PreferenceFormFields::class;
 
     /**
+     * The form actions.
+     *
+     * @var array
+     */
+    protected $actions = [
+        'save'
+    ];
+
+    /**
      * The form options.
      *
      * @var array
@@ -35,5 +44,4 @@ class PreferenceFormBuilder extends FormBuilder
     protected $options = [
         'breadcrumb' => false
     ];
-
 }

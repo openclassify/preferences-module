@@ -18,7 +18,13 @@ class AnomalyModulePreferencesCreatePreferencesFields extends Migration
      * @var array
      */
     protected $fields = [
-        'user'  => 'anomaly.field_type.user',
+        'user'  => [
+            'type'   => 'anomaly.field_type.relationship',
+            'config' => [
+                'mode'     => 'lookup',
+                'relation' => \Anomaly\UsersModule\User\UserModel::class
+            ]
+        ],
         'key'   => 'anomaly.field_type.text',
         'value' => 'anomaly.field_type.textarea'
     ];
