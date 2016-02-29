@@ -28,9 +28,9 @@ class PreferencesModuleServiceProvider extends AddonServiceProvider
      * @var array
      */
     protected $listeners = [
-        'Anomaly\Streams\Platform\Event\Response' => [
+        /*'Anomaly\Streams\Platform\Event\Response' => [
             'Anomaly\PreferencesModule\Preference\Listener\ConfigureStreams'
-        ]
+        ]*/
     ];
 
     /**
@@ -61,5 +61,4 @@ class PreferencesModuleServiceProvider extends AddonServiceProvider
     protected $singletons = [
         'Anomaly\PreferencesModule\Preference\Contract\PreferenceRepositoryInterface' => 'Anomaly\PreferencesModule\Preference\PreferenceRepository'
     ];
-
 }
