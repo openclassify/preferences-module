@@ -37,7 +37,7 @@ class ConfigureSystem
      */
     public function __construct(PreferenceRepositoryInterface $preferences, Repository $config)
     {
-        $this->config      = $config;
+        $this->config = $config;
         $this->preferences = $preferences;
     }
 
@@ -47,9 +47,14 @@ class ConfigureSystem
      */
     public function handle()
     {
-        $this->config->set('app.debug', $this->preferences->value('streams::debug', $this->config->get('app.debug')));
-        $this->config->set('app.timezone', $this->preferences->value('streams::timezone', $this->config->get('app.timezone')));
+        $this->config->set(
+            'app.timezone',
+            $this->preferences->value('streams::timezone', $this->config->get('app.timezone'))
+        );
 
-        $this->config->set('streams::system.per_page', $this->preferences->value('streams::per_page', 15));
+        $this->config->set(
+            'streams::system.per_page',
+            $this->preferences->value('streams::per_page', $this->config->get('streams::system.per_page'))
+        );
     }
 }
