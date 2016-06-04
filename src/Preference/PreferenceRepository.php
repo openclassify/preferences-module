@@ -58,6 +58,17 @@ class PreferenceRepository extends EntryRepository implements PreferenceReposito
     }
 
     /**
+     * Return if a preference exists or not.
+     *
+     * @param $key
+     * @return bool
+     */
+    public function has($key)
+    {
+        return $this->preferences->has($key);
+    }
+
+    /**
      * Get a preference.
      *
      * @param $key

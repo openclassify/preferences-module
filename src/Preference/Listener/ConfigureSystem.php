@@ -1,6 +1,8 @@
 <?php namespace Anomaly\PreferencesModule\Preference\Listener;
 
 use Anomaly\PreferencesModule\Preference\Contract\PreferenceRepositoryInterface;
+use Anomaly\Streams\Platform\Addon\Addon;
+use Anomaly\Streams\Platform\Addon\AddonCollection;
 use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Contracts\Config\Repository;
 
@@ -14,6 +16,13 @@ use Illuminate\Contracts\Config\Repository;
  */
 class ConfigureSystem
 {
+
+    /**
+     * The addon collection.
+     *
+     * @var AddonCollection
+     */
+    protected $addons;
 
     /**
      * The config repository.
@@ -33,11 +42,13 @@ class ConfigureSystem
      * Create a new ConfigureSystem instance.
      *
      * @param PreferenceRepositoryInterface $preferences
+     * @param AddonCollection               $addons
      * @param Repository                    $config
      */
-    public function __construct(PreferenceRepositoryInterface $preferences, Repository $config)
+    public function __construct(PreferenceRepositoryInterface $preferences, AddonCollection $addons, Repository $config)
     {
-        $this->config = $config;
+        $this->config      = $config;
+        $this->addons      = $addons;
         $this->preferences = $preferences;
     }
 
@@ -47,14 +58,60 @@ class ConfigureSystem
      */
     public function handle()
     {
-        $this->config->set(
-            'app.timezone',
-            $this->preferences->value('streams::timezone', $this->config->get('app.timezone'))
-        );
+        /* @var Addon $addon */
+        foreach ($this->addons->withConfig('preferences') as $addon) {
+            foreach ($this->config->get($addon->getNamespace('preferences')) as $key => $setting) {
 
-        $this->config->set(
-            'streams::system.per_page',
-            $this->preferences->value('streams::per_page', $this->config->get('streams::system.per_page'))
-        );
+                if (isset($setting['env']) && env($setting['env']) !== null) {
+                    continue;
+                }
+
+                if (!isset($setting['bind'])) {
+                    continue;
+                }
+
+                if (!$this->preferences->has($key = $addon->getNamespace($key))) {
+                    continue;
+                }
+
+                $this->config->set($setting['bind'], $this->preferences->value($key));
+            }
+        }
+
+        foreach ($this->addons->withConfig('preferences/preferences') as $addon) {
+            foreach ($this->config->get($addon->getNamespace('preferences/preferences')) as $key => $setting) {
+
+                if (isset($setting['env']) && env($setting['env']) !== null) {
+                    continue;
+                }
+
+                if (!isset($setting['bind'])) {
+                    continue;
+                }
+
+                if (!$this->preferences->has($key = $addon->getNamespace($key))) {
+                    continue;
+                }
+
+                $this->config->set($setting['bind'], $this->preferences->value($key));
+            }
+        }
+
+        foreach ($this->config->get('streams::preferences/preferences') as $key => $setting) {
+
+            if (isset($setting['env']) && env($setting['env']) !== null) {
+                continue;
+            }
+
+            if (!isset($setting['bind'])) {
+                continue;
+            }
+
+            if (!$this->preferences->has($key = 'streams::' . $key)) {
+                continue;
+            }
+
+            $this->config->set($setting['bind'], $this->preferences->value($key));
+        }
     }
 }

@@ -17,6 +17,14 @@ interface PreferenceRepositoryInterface extends EntryRepositoryInterface
 {
 
     /**
+     * Return if a preference exists or not.
+     *
+     * @param $key
+     * @return bool
+     */
+    public function has($key);
+
+    /**
      * Get a preference.
      *
      * @param $key

@@ -101,6 +101,16 @@ class PreferenceFormFields implements SelfHandling
             } else {
                 $field['value'] = array_get($field['config'], 'default_value');
             }
+
+            /**
+             * Disable the field if it
+             * has a set env value.
+             */
+            if (isset($field['env']) && ($value = env($field['env'])) !== null) {
+                $field['disabled'] = true;
+                $field['value']    = $value;
+                $field['warning']  = 'module::message.env_locked';
+            }
         }
 
         $builder->setFields($fields);
