@@ -97,7 +97,7 @@ class ConfigureSystem
             }
         }
 
-        foreach ($this->config->get('streams::preferences/preferences') as $key => $setting) {
+        foreach ($this->config->get('streams::preferences/preferences', []) as $key => $setting) {
 
             if (isset($setting['env']) && env($setting['env']) !== null) {
                 continue;
