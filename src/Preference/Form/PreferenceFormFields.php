@@ -106,10 +106,10 @@ class PreferenceFormFields implements SelfHandling
              * Disable the field if it
              * has a set env value.
              */
-            if (isset($field['env']) && ($value = env($field['env'])) !== null) {
+            if (isset($field['env']) && isset($field['bind']) && env($field['env']) !== null) {
                 $field['disabled'] = true;
-                $field['value']    = $value;
                 $field['warning']  = 'module::message.env_locked';
+                $field['value']    = $this->config->get($field['bind']);
             }
         }
 
