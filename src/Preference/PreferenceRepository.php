@@ -117,6 +117,22 @@ class PreferenceRepository extends EntryRepository implements PreferenceReposito
     }
 
     /**
+     * Return the field type
+     * presenter for a preference.
+     *
+     * @param $key
+     * @return FieldTypePresenter|null
+     */
+    public function presenter($key)
+    {
+        if ($preference = $this->get($key)) {
+            return $preference->getFieldTypePresenter('value');
+        }
+
+        return null;
+    }
+
+    /**
      * Find a preference by it's key
      * or return a new instance.
      *

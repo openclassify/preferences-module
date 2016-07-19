@@ -74,7 +74,7 @@ class ConfigureSystem
                     continue;
                 }
 
-                $this->config->set($setting['bind'], $this->preferences->value($key));
+                $this->config->set($setting['bind'], $this->preferences->presenter($key)->__value);
             }
         }
 
@@ -93,7 +93,7 @@ class ConfigureSystem
                     continue;
                 }
 
-                $this->config->set($setting['bind'], $this->preferences->value($key));
+                $this->config->set($setting['bind'], $this->preferences->presenter($key)->__value);
             }
         }
 
@@ -111,7 +111,7 @@ class ConfigureSystem
                 continue;
             }
 
-            $this->config->set($setting['bind'], $this->preferences->value($key));
+            $this->config->set($setting['bind'], $this->preferences->presenter($key)->__value);
         }
     }
 }
