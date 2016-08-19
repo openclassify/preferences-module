@@ -1,10 +1,10 @@
 <?php
 
 return [
-    'settings' => [
-        'name' => 'Settings',
+    'preferences' => [
+        'name'   => 'Preferences',
         'option' => [
-            'write'  => 'Can create and edit preferences?',
+            'write' => 'Can create and edit preferences?',
         ]
     ]
 ];

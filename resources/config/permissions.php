@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'settings' => [
+    'preferences' => [
         'write'
     ]
 ];
