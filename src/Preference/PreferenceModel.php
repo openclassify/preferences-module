@@ -18,7 +18,6 @@ use Illuminate\Database\Eloquent\Builder;
  * @link          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\PreferencesModule\PreferenceInterface
  */
 class PreferenceModel extends PreferencesPreferencesEntryModel implements PreferenceInterface
 {
@@ -77,7 +76,7 @@ class PreferenceModel extends PreferencesPreferencesEntryModel implements Prefer
     /**
      * Set the user.
      *
-     * @param UserInterface $user
+     * @param  UserInterface $user
      * @return $this
      */
     public function setUser(UserInterface $user)

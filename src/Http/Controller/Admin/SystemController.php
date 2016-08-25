@@ -10,7 +10,6 @@ use Anomaly\Streams\Platform\Support\Authorizer;
  * @link          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\PreferencesModule\Http\Controller\Admin
  */
 class SystemController extends AdminController
 {
@@ -18,8 +17,8 @@ class SystemController extends AdminController
     /**
      * Return the form for editing preferences.
      *
-     * @param PreferenceFormBuilder $form
-     * @param Authorizer            $authorizer
+     * @param  PreferenceFormBuilder                      $form
+     * @param  Authorizer                                 $authorizer
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function edit(PreferenceFormBuilder $form, Authorizer $authorizer)

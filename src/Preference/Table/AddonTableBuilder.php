@@ -8,7 +8,6 @@ use Anomaly\Streams\Platform\Ui\Table\TableBuilder;
  * @link          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\PreferencesModule\Preference\Table
  */
 class AddonTableBuilder extends TableBuilder
 {
@@ -28,12 +27,12 @@ class AddonTableBuilder extends TableBuilder
     protected $columns = [
         [
             'heading' => 'module::field.name.name',
-            'value'   => 'entry.name'
+            'value'   => 'entry.name',
         ],
         [
             'heading' => 'module::field.description.name',
-            'value'   => 'entry.description'
-        ]
+            'value'   => 'entry.description',
+        ],
     ];
 
     /**
@@ -43,8 +42,8 @@ class AddonTableBuilder extends TableBuilder
      */
     protected $buttons = [
         'preferences' => [
-            'href' => 'admin/preferences/{request.route.parameters.type}/{entry.namespace}'
-        ]
+            'href' => 'admin/preferences/{request.route.parameters.type}/{entry.namespace}',
+        ],
     ];
 
     /**

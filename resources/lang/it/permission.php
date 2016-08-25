@@ -3,7 +3,7 @@
 return [
     'settings' => [
         'name' => 'Impostazioni',
-    'option' => [
+    'option'   => [
         'write' => 'Può creare o modificare le preferenze?',
     ],
     ],

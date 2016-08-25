@@ -13,7 +13,6 @@ use Illuminate\Contracts\Auth\Guard;
  * @link          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\PreferencesModule\PreferenceInterface
  */
 class PreferenceRepository extends EntryRepository implements PreferenceRepositoryInterface
 {
@@ -103,8 +102,8 @@ class PreferenceRepository extends EntryRepository implements PreferenceReposito
     /**
      * Get a preference value presenter instance.
      *
-     * @param      $key
-     * @param null $default
+     * @param                          $key
+     * @param  null                    $default
      * @return FieldTypePresenter|null
      */
     public function value($key, $default = null)

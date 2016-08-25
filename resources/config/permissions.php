@@ -2,6 +2,6 @@
 
 return [
     'preferences' => [
-        'write'
-    ]
+        'write',
+    ],
 ];

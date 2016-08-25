@@ -5,6 +5,6 @@ return [
         'name'   => 'Preferences',
         'option' => [
             'write' => 'Can create and edit preferences?',
-        ]
-    ]
+        ],
+    ],
 ];

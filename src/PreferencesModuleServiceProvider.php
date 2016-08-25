@@ -8,7 +8,6 @@ use Anomaly\Streams\Platform\Addon\AddonServiceProvider;
  * @link          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\PreferencesModule
  */
 class PreferencesModuleServiceProvider extends AddonServiceProvider
 {
@@ -19,7 +18,7 @@ class PreferencesModuleServiceProvider extends AddonServiceProvider
      * @var array
      */
     protected $plugins = [
-        'Anomaly\PreferencesModule\PreferencesModulePlugin'
+        'Anomaly\PreferencesModule\PreferencesModulePlugin',
     ];
 
     /**
@@ -29,8 +28,8 @@ class PreferencesModuleServiceProvider extends AddonServiceProvider
      */
     protected $listeners = [
         'Anomaly\Streams\Platform\Event\Response' => [
-            'Anomaly\PreferencesModule\Preference\Listener\ConfigureSystem'
-        ]
+            'Anomaly\PreferencesModule\Preference\Listener\ConfigureSystem',
+        ],
     ];
 
     /**
@@ -41,7 +40,7 @@ class PreferencesModuleServiceProvider extends AddonServiceProvider
     protected $routes = [
         'admin/preferences'                => 'Anomaly\PreferencesModule\Http\Controller\Admin\SystemController@edit',
         'admin/preferences/{type}'         => 'Anomaly\PreferencesModule\Http\Controller\Admin\AddonsController@index',
-        'admin/preferences/{type}/{addon}' => 'Anomaly\PreferencesModule\Http\Controller\Admin\AddonsController@edit'
+        'admin/preferences/{type}/{addon}' => 'Anomaly\PreferencesModule\Http\Controller\Admin\AddonsController@edit',
     ];
 
     /**
@@ -50,7 +49,7 @@ class PreferencesModuleServiceProvider extends AddonServiceProvider
      * @var array
      */
     protected $bindings = [
-        'Anomaly\Streams\Platform\Model\Preferences\PreferencesPreferencesEntryModel' => 'Anomaly\PreferencesModule\Preference\PreferenceModel'
+        'Anomaly\Streams\Platform\Model\Preferences\PreferencesPreferencesEntryModel' => 'Anomaly\PreferencesModule\Preference\PreferenceModel',
     ];
 
     /**
@@ -59,6 +58,6 @@ class PreferencesModuleServiceProvider extends AddonServiceProvider
      * @var array
      */
     protected $singletons = [
-        'Anomaly\PreferencesModule\Preference\Contract\PreferenceRepositoryInterface' => 'Anomaly\PreferencesModule\Preference\PreferenceRepository'
+        'Anomaly\PreferencesModule\Preference\Contract\PreferenceRepositoryInterface' => 'Anomaly\PreferencesModule\Preference\PreferenceRepository',
     ];
 }

@@ -1,7 +1,7 @@
 <?php namespace Anomaly\PreferencesModule\Preference\Command;
 
 use Anomaly\PreferencesModule\Preference\Contract\PreferenceRepositoryInterface;
-use Illuminate\Contracts\Bus\SelfHandling;
+
 
 /**
  * Class GetPreferenceValue
@@ -9,9 +9,8 @@ use Illuminate\Contracts\Bus\SelfHandling;
  * @link          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\PreferencesModule\Preference\Command
  */
-class GetPreferenceValue implements SelfHandling
+class GetPreferenceValue
 {
 
     /**
@@ -43,7 +42,7 @@ class GetPreferenceValue implements SelfHandling
     /**
      * Handle the command.
      *
-     * @param PreferenceRepositoryInterface $preferences
+     * @param  PreferenceRepositoryInterface $preferences
      * @return mixed
      */
     public function handle(PreferenceRepositoryInterface $preferences)

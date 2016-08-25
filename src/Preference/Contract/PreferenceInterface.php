@@ -10,7 +10,6 @@ use Anomaly\UsersModule\User\Contract\UserInterface;
  * @link          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\PreferencesModule\PreferenceInterface\Contract
  */
 interface PreferenceInterface extends EntryInterface
 {
@@ -40,7 +39,7 @@ interface PreferenceInterface extends EntryInterface
     /**
      * Set the user.
      *
-     * @param UserInterface $user
+     * @param  UserInterface $user
      * @return $this
      */
     public function setUser(UserInterface $user);

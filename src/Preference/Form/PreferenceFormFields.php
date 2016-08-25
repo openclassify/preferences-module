@@ -2,7 +2,7 @@
 
 use Anomaly\PreferencesModule\Preference\Contract\PreferenceRepositoryInterface;
 use Illuminate\Config\Repository;
-use Illuminate\Contracts\Bus\SelfHandling;
+
 
 /**
  * Class PreferenceFormFields
@@ -10,9 +10,8 @@ use Illuminate\Contracts\Bus\SelfHandling;
  * @link          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\PreferencesModule\Preference\Form
  */
-class PreferenceFormFields implements SelfHandling
+class PreferenceFormFields
 {
 
     /**
@@ -41,7 +40,7 @@ class PreferenceFormFields implements SelfHandling
     {
         $namespace = $builder->getEntry() . '::';
 
-        /**
+        /*
          * Get the fields from the config system. Sections are
          * optionally defined the same way.
          */
@@ -53,12 +52,12 @@ class PreferenceFormFields implements SelfHandling
             $builder->setSections($sections);
         }
 
-        /**
+        /*
          * Finish each field.
          */
         foreach ($fields as $slug => &$field) {
 
-            /**
+            /*
              * Force an array. This is done later
              * too in normalization but we need it now
              * because we are normalizing / guessing our
@@ -66,7 +65,7 @@ class PreferenceFormFields implements SelfHandling
              */
             if (is_string($field)) {
                 $field = [
-                    'type' => $field
+                    'type' => $field,
                 ];
             }
 
@@ -102,7 +101,7 @@ class PreferenceFormFields implements SelfHandling
                 $field['value'] = array_get($field['config'], 'default_value');
             }
 
-            /**
+            /*
              * Disable the field if it
              * has a set env value.
              */

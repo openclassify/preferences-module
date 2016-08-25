@@ -18,7 +18,7 @@ class AnomalyModulePreferencesCreatePreferencesStreams extends Migration
      * @var array
      */
     protected $stream = [
-        'slug' => 'preferences'
+        'slug' => 'preferences',
     ];
 
     /**
@@ -28,12 +28,12 @@ class AnomalyModulePreferencesCreatePreferencesStreams extends Migration
      */
     protected $assignments = [
         'user' => [
-            'required' => true
+            'required' => true,
         ],
         'key'  => [
-            'required' => true
+            'required' => true,
         ],
-        'value'
+        'value',
     ];
 
 }

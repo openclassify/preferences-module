@@ -13,7 +13,6 @@ use Illuminate\Container\Container;
  * @link          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\PreferencesModule\Preference\Form
  */
 class PreferenceFormRepository implements FormRepositoryInterface
 {
@@ -67,7 +66,7 @@ class PreferenceFormRepository implements FormRepositoryInterface
     /**
      * Save the form.
      *
-     * @param FormBuilder $builder
+     * @param  FormBuilder $builder
      * @return bool|mixed
      */
     public function save(FormBuilder $builder)

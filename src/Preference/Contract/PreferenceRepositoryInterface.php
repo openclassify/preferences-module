@@ -11,7 +11,6 @@ use Anomaly\Streams\Platform\Entry\Contract\EntryRepositoryInterface;
  * @link          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
- * @package       Anomaly\PreferencesModule\PreferenceInterface\Contract
  */
 interface PreferenceRepositoryInterface extends EntryRepositoryInterface
 {
@@ -44,8 +43,8 @@ interface PreferenceRepositoryInterface extends EntryRepositoryInterface
     /**
      * Get a preference value presenter instance.
      *
-     * @param      $key
-     * @param null $default
+     * @param                          $key
+     * @param  null                    $default
      * @return FieldTypePresenter|null
      */
     public function value($key, $default = null);

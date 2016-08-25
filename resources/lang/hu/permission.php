@@ -3,7 +3,7 @@
 return [
     'settings' => [
         'name' => 'Beállítások',
-    'option' => [
+    'option'   => [
         'write' => 'Létrehozhat és szerkeszthet beállításokat?',
     ],
     ],
