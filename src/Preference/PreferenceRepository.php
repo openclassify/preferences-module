@@ -5,7 +5,7 @@ use Anomaly\PreferencesModule\Preference\Contract\PreferenceRepositoryInterface;
 use Anomaly\Streams\Platform\Addon\FieldType\FieldTypePresenter;
 use Anomaly\Streams\Platform\Entry\EntryRepository;
 use Anomaly\UsersModule\User\Contract\UserInterface;
-use Illuminate\Auth\Guard;
+use Illuminate\Contracts\Auth\Guard;
 
 /**
  * Class PreferenceRepositoryInterface
