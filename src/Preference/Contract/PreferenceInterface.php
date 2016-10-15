@@ -1,5 +1,6 @@
 <?php namespace Anomaly\PreferencesModule\Preference\Contract;
 
+use Anomaly\Streams\Platform\Addon\FieldType\FieldType;
 use Anomaly\Streams\Platform\Addon\FieldType\FieldTypePresenter;
 use Anomaly\Streams\Platform\Entry\Contract\EntryInterface;
 use Anomaly\UsersModule\User\Contract\UserInterface;
@@ -13,6 +14,13 @@ use Anomaly\UsersModule\User\Contract\UserInterface;
  */
 interface PreferenceInterface extends EntryInterface
 {
+
+    /**
+     * Return the value field.
+     *
+     * @return FieldType
+     */
+    public function field();
 
     /**
      * Get the key.

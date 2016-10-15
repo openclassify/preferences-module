@@ -23,16 +23,26 @@ class PreferenceModel extends PreferencesPreferencesEntryModel implements Prefer
 {
 
     /**
-     * The cache minutes.
+     * Return the value field.
      *
-     * @var int
+     * @return FieldType
      */
-    protected $cacheMinutes = 99999;
+    public function field()
+    {
+        /* @var FieldType $field */
+        $field = $this->dispatch(new GetValueFieldType($this));
+
+        if (!$field) {
+            return null;
+        }
+
+        return $field;
+    }
 
     /**
      * Limit to preferences belonging to the provided user.
      *
-     * @param Builder       $query
+     * @param Builder $query
      * @param UserInterface $user
      */
     public function scopeBelongingToUser(Builder $query, UserInterface $user)
@@ -129,14 +139,11 @@ class PreferenceModel extends PreferencesPreferencesEntryModel implements Prefer
      */
     protected function getValueAttribute()
     {
-        /* @var FieldType $type */
-        $type = $this->dispatch(new GetValueFieldType($this));
-
-        if (!$type) {
-            return $this->attributes['value'];
+        if (!$field = $this->field()) {
+            return null;
         }
 
-        return $type->getValue();
+        return $field->getValue();
     }
 
     /**
