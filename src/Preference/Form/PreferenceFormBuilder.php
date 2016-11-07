@@ -27,6 +27,15 @@ class PreferenceFormBuilder extends FormBuilder
     protected $fields = PreferenceFormFields::class;
 
     /**
+     * The form actions.
+     *
+     * @var array
+     */
+    protected $actions = [
+        'update',
+    ];
+
+    /**
      * The form options.
      *
      * @var array
