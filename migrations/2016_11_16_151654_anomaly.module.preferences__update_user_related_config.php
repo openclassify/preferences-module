@@ -41,8 +41,8 @@ class AnomalyModulePreferencesUpdateUserRelatedConfig extends Migration
         $field = $this->fields()->findBySlugAndNamespace('user', 'preferences');
 
         $field->config = [
-            'mode'     => 'lookup',
-            'relation' => 'Anomaly\UsersModule\User\UserModel',
+            'mode'    => 'lookup',
+            'related' => 'Anomaly\UsersModule\User\UserModel',
         ];
 
         $field->save();

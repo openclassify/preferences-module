@@ -21,8 +21,8 @@ class AnomalyModulePreferencesCreatePreferencesFields extends Migration
         'user'  => [
             'type'   => 'anomaly.field_type.relationship',
             'config' => [
-                'mode'     => 'lookup',
-                'relation' => 'Anomaly\UsersModule\User\UserModel',
+                'mode'    => 'lookup',
+                'related' => 'Anomaly\UsersModule\User\UserModel',
             ],
         ],
         'key'   => 'anomaly.field_type.text',
