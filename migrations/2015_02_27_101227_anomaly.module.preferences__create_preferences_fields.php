@@ -22,7 +22,7 @@ class AnomalyModulePreferencesCreatePreferencesFields extends Migration
             'type'   => 'anomaly.field_type.relationship',
             'config' => [
                 'mode'     => 'lookup',
-                'relation' => \Anomaly\UsersModule\User\UserModel::class,
+                'relation' => 'Anomaly\UsersModule\User\UserModel',
             ],
         ],
         'key'   => 'anomaly.field_type.text',
