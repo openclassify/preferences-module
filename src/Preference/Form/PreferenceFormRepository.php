@@ -76,7 +76,7 @@ class PreferenceFormRepository implements FormRepositoryInterface
         $namespace = $form->getEntry() . '::';
 
         /* @var FieldType $field */
-        foreach ($form->getFields() as $field) {
+        foreach ($form->getEnabledFields() as $field) {
 
             $key   = $namespace . $field->getField();
             $value = $form->getValue($field->getInputName());
