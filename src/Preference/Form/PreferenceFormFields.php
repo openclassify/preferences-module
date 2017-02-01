@@ -72,33 +72,63 @@ class PreferenceFormFields
             // Make sure we have a config property.
             $field['config'] = array_get($field, 'config', []);
 
+            if (trans()->has(
+                $label = array_get(
+                    $field,
+                    'label',
+                    $namespace . 'preference.' . $slug . '.label'
+                )
+            )
+            ) {
+                $field['label'] = $label;
+            }
+
             // Default the label.
             $field['label'] = array_get(
                 $field,
                 'label',
-                $namespace . 'preference.' . $slug . '.label'
+                $namespace . 'preference.' . $slug . '.name'
             );
+
+            // Default the warning.
+            if (trans()->has(
+                $warning = array_get(
+                    $field,
+                    'warning',
+                    $namespace . 'preference.' . $slug . '.warning'
+                )
+            )
+            ) {
+                $field['warning'] = $warning;
+            }
 
             // Default the placeholder.
-            $field['config']['placeholder'] = array_get(
-                $field['config'],
-                'placeholder',
-                $namespace . 'preference.' . $slug . '.placeholder'
-            );
+            if (trans()->has(
+                $placeholder = array_get(
+                    $field,
+                    'placeholder',
+                    $namespace . 'preference.' . $slug . '.placeholder'
+                )
+            )
+            ) {
+                $field['placeholder'] = $placeholder;
+            }
 
             // Default the instructions.
-            $field['instructions'] = array_get(
-                $field,
-                'instructions',
-                $namespace . 'preference.' . $slug . '.instructions'
-            );
+            if (trans()->has(
+                $instructions = array_get(
+                    $field,
+                    'instructions',
+                    $namespace . 'preference.' . $slug . '.instructions'
+                )
+            )
+            ) {
+                $field['instructions'] = $instructions;
+            }
 
             // Get the value defaulting to the default value.
-
-            if ($preference = $preferences->get($namespace . $slug)) {
-                $field['value'] = $preference->getValue();
-            } else {
-                $field['value'] = array_get($field['config'], 'default_value');
+            if (!isset($field['value'])) {
+                $field['value'] = $preferences->value($namespace . $slug, array_get($field['config'], 'default_value'));
             }
 
             /*

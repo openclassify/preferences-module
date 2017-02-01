@@ -27,6 +27,7 @@ class PreferencesModule extends Module
     protected $sections = [
         'system',
         'modules',
+        'themes',
         'extensions',
         'field_types',
         'plugins',

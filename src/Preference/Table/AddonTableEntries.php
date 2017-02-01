@@ -23,7 +23,7 @@ class AddonTableEntries
     public function handle(AddonTableBuilder $builder, AddonCollection $addons)
     {
         /* @var AddonCollection|ModuleCollection|ExtensionCollection $entries */
-        $entries = $addons->{$builder->getType()}->withAnyConfig(['preferences\', \'preferences/preferences']);
+        $entries = $addons->{$builder->getType()}->withAnyConfig(['preferences', 'preferences/preferences']);
 
         if (in_array($builder->getType(), ['modules', 'extensions'])) {
             $entries = $entries->enabled();
