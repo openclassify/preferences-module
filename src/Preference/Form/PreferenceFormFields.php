@@ -1,7 +1,7 @@
 <?php namespace Anomaly\PreferencesModule\Preference\Form;
 
 use Anomaly\PreferencesModule\Preference\Contract\PreferenceRepositoryInterface;
-use Illuminate\Config\Repository;
+use Illuminate\Contracts\Config\Repository;
 
 
 /**
