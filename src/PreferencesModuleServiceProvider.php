@@ -1,6 +1,12 @@
 <?php namespace Anomaly\PreferencesModule;
 
+use Anomaly\PreferencesModule\Preference\Contract\PreferenceRepositoryInterface;
+use Anomaly\PreferencesModule\Preference\Listener\ConfigureSystem;
+use Anomaly\PreferencesModule\Preference\PreferenceModel;
+use Anomaly\PreferencesModule\Preference\PreferenceRepository;
 use Anomaly\Streams\Platform\Addon\AddonServiceProvider;
+use Anomaly\Streams\Platform\Event\Response;
+use Anomaly\Streams\Platform\Model\Preferences\PreferencesPreferencesEntryModel;
 
 /**
  * Class PreferencesModuleServiceProvider
@@ -18,7 +24,7 @@ class PreferencesModuleServiceProvider extends AddonServiceProvider
      * @var array
      */
     protected $plugins = [
-        'Anomaly\PreferencesModule\PreferencesModulePlugin',
+        PreferencesModulePlugin::class,
     ];
 
     /**
@@ -27,8 +33,8 @@ class PreferencesModuleServiceProvider extends AddonServiceProvider
      * @var array
      */
     protected $listeners = [
-        'Anomaly\Streams\Platform\Event\Response' => [
-            'Anomaly\PreferencesModule\Preference\Listener\ConfigureSystem',
+        Response::class => [
+            ConfigureSystem::class,
         ],
     ];
 
@@ -49,7 +55,7 @@ class PreferencesModuleServiceProvider extends AddonServiceProvider
      * @var array
      */
     protected $bindings = [
-        'Anomaly\Streams\Platform\Model\Preferences\PreferencesPreferencesEntryModel' => 'Anomaly\PreferencesModule\Preference\PreferenceModel',
+        PreferencesPreferencesEntryModel::class => PreferenceModel::class,
     ];
 
     /**
@@ -58,6 +64,6 @@ class PreferencesModuleServiceProvider extends AddonServiceProvider
      * @var array
      */
     protected $singletons = [
-        'Anomaly\PreferencesModule\Preference\Contract\PreferenceRepositoryInterface' => 'Anomaly\PreferencesModule\Preference\PreferenceRepository',
+        PreferenceRepositoryInterface::class => PreferenceRepository::class,
     ];
 }
