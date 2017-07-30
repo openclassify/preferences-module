@@ -27,8 +27,8 @@ class PreferencesModulePlugin extends Plugin
         return [
             new \Twig_SimpleFunction(
                 'preference_value',
-                function ($key) {
-                    return $this->dispatch(new GetPreferenceValue($key));
+                function ($key, $default = null) {
+                    return $this->dispatch(new GetPreferenceValue($key, $default));
                 }
             ),
             new \Twig_SimpleFunction(
