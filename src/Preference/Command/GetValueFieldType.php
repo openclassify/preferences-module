@@ -2,7 +2,7 @@
 
 use Anomaly\PreferencesModule\Preference\Contract\PreferenceInterface;
 use Anomaly\Streams\Platform\Addon\FieldType\FieldType;
-use Anomaly\Streams\Platform\Addon\FieldType\FieldTypeCollection;
+use Anomaly\Streams\Platform\Addon\FieldType\FieldTypeBuilder;
 use Illuminate\Contracts\Config\Repository;
 
 /**
@@ -35,11 +35,11 @@ class GetValueFieldType
     /**
      * Handle the command.
      *
-     * @param  FieldTypeCollection $fieldTypes
-     * @param  Repository          $config
+     * @param  FieldTypeBuilder $fieldTypes
+     * @param  Repository $config
      * @return FieldType
      */
-    public function handle(FieldTypeCollection $fieldTypes, Repository $config)
+    public function handle(FieldTypeBuilder $fieldTypes, Repository $config)
     {
         // Get the preference's key.
         $key = $this->preference->getKey();
@@ -64,7 +64,7 @@ class GetValueFieldType
          * the preference uses. If none exists
          * then just return the value as is.
          */
-        $type = $fieldTypes->get(array_get($field, 'type'));
+        $type = $fieldTypes->build(array_get($field, 'type'));
 
         if (!$type) {
             return null;
