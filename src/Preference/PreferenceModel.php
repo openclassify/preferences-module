@@ -23,14 +23,6 @@ class PreferenceModel extends PreferencesPreferencesEntryModel implements Prefer
 {
 
     /**
-     * Cache this for
-     * up to 60 minutes.
-     *
-     * @var int
-     */
-    protected $ttl = 60;
-
-    /**
      * Return the value field.
      *
      * @return FieldType
