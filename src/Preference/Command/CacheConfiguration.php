@@ -26,7 +26,7 @@ class CacheConfiguration
         PreferenceConfiguration $configuration,
         AddonCollection $addons
     ) {
-        $preferences->cache(
+        $preferences->cacheForever(
             'anomaly.module.preferences::preferences.config',
             function () use ($addons, $configuration) {
 
