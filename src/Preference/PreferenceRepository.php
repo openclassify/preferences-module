@@ -8,11 +8,11 @@ use Anomaly\UsersModule\User\Contract\UserInterface;
 use Illuminate\Contracts\Auth\Guard;
 
 /**
- * Class PreferenceRepositoryInterface
+ * Class PreferenceRepository
  *
- * @link          http://pyrocms.com/
- * @author        PyroCMS, Inc. <support@pyrocms.com>
- * @author        Ryan Thompson <ryan@pyrocms.com>
+ * @link   http://pyrocms.com/
+ * @author PyroCMS, Inc. <support@pyrocms.com>
+ * @author Ryan Thompson <ryan@pyrocms.com>
  */
 class PreferenceRepository extends EntryRepository implements PreferenceRepositoryInterface
 {
@@ -41,7 +41,7 @@ class PreferenceRepository extends EntryRepository implements PreferenceReposito
     /**
      * Create a new PreferenceRepositoryInterface instance.
      *
-     * @param Guard           $auth
+     * @param Guard $auth
      * @param PreferenceModel $model
      */
     public function __construct(Guard $auth, PreferenceModel $model)
@@ -49,10 +49,19 @@ class PreferenceRepository extends EntryRepository implements PreferenceReposito
         $this->auth  = $auth;
         $this->model = $model;
 
+        $this->load();
+    }
+
+    /**
+     * Load the preferences.
+     */
+    public function load()
+    {
         $this->preferences = new PreferenceCollection();
 
+        /* @var UserInterface $user */
         if ($user = $this->auth->user()) {
-            $this->preferences = $this->model->belongingToUser($auth->getUser())->get();
+            $this->preferences = $this->model->belongingToUser($user)->get();
         }
     }
 
@@ -103,7 +112,7 @@ class PreferenceRepository extends EntryRepository implements PreferenceReposito
      * Get a preference value presenter instance.
      *
      * @param                          $key
-     * @param  null                    $default
+     * @param  null $default
      * @return FieldTypePresenter|null
      */
     public function value($key, $default = null)
