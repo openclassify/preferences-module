@@ -4,6 +4,7 @@ use Anomaly\PreferencesModule\Preference\Contract\PreferenceInterface;
 use Anomaly\PreferencesModule\Preference\Contract\PreferenceRepositoryInterface;
 use Anomaly\Streams\Platform\Addon\FieldType\FieldTypePresenter;
 use Anomaly\Streams\Platform\Entry\EntryRepository;
+use Anomaly\Streams\Platform\Model\EloquentModel;
 use Anomaly\UsersModule\User\Contract\UserInterface;
 use Illuminate\Contracts\Auth\Guard;
 
@@ -16,13 +17,6 @@ use Illuminate\Contracts\Auth\Guard;
  */
 class PreferenceRepository extends EntryRepository implements PreferenceRepositoryInterface
 {
-
-    /**
-     * The authentication guard.
-     *
-     * @var Guard
-     */
-    protected $auth;
 
     /**
      * The preference model.
@@ -44,9 +38,8 @@ class PreferenceRepository extends EntryRepository implements PreferenceReposito
      * @param Guard $auth
      * @param PreferenceModel $model
      */
-    public function __construct(Guard $auth, PreferenceModel $model)
+    public function __construct(PreferenceModel $model)
     {
-        $this->auth  = $auth;
         $this->model = $model;
 
         $this->load();
@@ -60,7 +53,7 @@ class PreferenceRepository extends EntryRepository implements PreferenceReposito
         $this->preferences = new PreferenceCollection();
 
         /* @var UserInterface $user */
-        if ($user = $this->auth->user()) {
+        if ($user = auth()->user()) {
             $this->preferences = $this->model->belongingToUser($user)->get();
         }
     }
@@ -96,10 +89,11 @@ class PreferenceRepository extends EntryRepository implements PreferenceReposito
      */
     public function set($key, $value)
     {
-        if (!$user = $this->auth->getUser()) {
+        if (!$user = auth()->user()) {
             throw new \Exception('The user could not be determined.');
         }
 
+        /* @var PreferenceInterface|EloquentModel $preference */
         $preference = $this->findByKeyOrNew($key);
 
         $preference->setUser($user);

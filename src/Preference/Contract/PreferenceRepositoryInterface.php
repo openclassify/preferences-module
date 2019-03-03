@@ -16,6 +16,11 @@ interface PreferenceRepositoryInterface extends EntryRepositoryInterface
 {
 
     /**
+     * Load preferences.
+     */
+    public function load();
+
+    /**
      * Return if a preference exists or not.
      *
      * @param $key

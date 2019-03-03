@@ -15,9 +15,9 @@ use Illuminate\Database\Eloquent\Builder;
  *
  * @method Builder belongingToUser(UserInterface $user)
  *
- * @link          http://pyrocms.com/
- * @author        PyroCMS, Inc. <support@pyrocms.com>
- * @author        Ryan Thompson <ryan@pyrocms.com>
+ * @link   http://pyrocms.com/
+ * @author PyroCMS, Inc. <support@pyrocms.com>
+ * @author Ryan Thompson <ryan@pyrocms.com>
  */
 class PreferenceModel extends PreferencesPreferencesEntryModel implements PreferenceInterface
 {

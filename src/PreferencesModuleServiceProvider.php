@@ -10,6 +10,7 @@ use Anomaly\PreferencesModule\Preference\PreferenceRepository;
 use Anomaly\Streams\Platform\Addon\AddonServiceProvider;
 use Anomaly\Streams\Platform\Addon\Extension\Event\ExtensionWasUninstalled;
 use Anomaly\Streams\Platform\Addon\Module\Event\ModuleWasUninstalled;
+use Anomaly\Streams\Platform\Event\Response;
 use Anomaly\Streams\Platform\Model\Preferences\PreferencesPreferencesEntryModel;
 
 /**
@@ -37,6 +38,10 @@ class PreferencesModuleServiceProvider extends AddonServiceProvider
      * @var array
      */
     protected $listeners = [
+        Response::class                => [
+            CacheConfiguration::class,
+            ConfigureSystem::class,
+        ],
         ModuleWasUninstalled::class    => [
             DeleteModulePreferences::class,
         ],
@@ -73,14 +78,5 @@ class PreferencesModuleServiceProvider extends AddonServiceProvider
         'admin/preferences/{type}'         => 'Anomaly\PreferencesModule\Http\Controller\Admin\AddonsController@index',
         'admin/preferences/{type}/{addon}' => 'Anomaly\PreferencesModule\Http\Controller\Admin\AddonsController@edit',
     ];
-
-    /**
-     * Boot the addon.
-     */
-    public function boot()
-    {
-        dispatch_now(new CacheConfiguration());
-        dispatch_now(new ConfigureSystem());
-    }
 
 }

@@ -23,8 +23,6 @@ class ConfigureSystem
      */
     public function handle()
     {
-        foreach (cache('anomaly.module.preferences::preferences.config', []) as $key => $value) {
-            config()->set($key, $value);
-        }
+        config(cache('anomaly.module.preferences::preferences.config', []));
     }
 }

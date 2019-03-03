@@ -16,16 +16,13 @@ class CacheConfiguration
 
     /**
      * Handle the command.
-     *
-     * @param PreferenceRepositoryInterface $preferences
-     * @param PreferenceConfiguration $configuration
-     * @param AddonCollection $addons
      */
-    public function handle(
-        PreferenceRepositoryInterface $preferences,
-        PreferenceConfiguration $configuration,
-        AddonCollection $addons
-    ) {
+    public function handle()
+    {
+        $preferences   = app(PreferenceRepositoryInterface::class);
+        $configuration = app(PreferenceConfiguration::class);
+        $addons        = app(AddonCollection::class);
+
         $preferences->cacheForever(
             'anomaly.module.preferences::preferences.config',
             function () use ($addons, $configuration) {
