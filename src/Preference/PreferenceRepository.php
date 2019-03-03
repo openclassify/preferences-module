@@ -144,7 +144,7 @@ class PreferenceRepository extends EntryRepository implements PreferenceReposito
     public function findByKeyOrNew($key)
     {
         /* @var UserInterface $user */
-        if (!$user = $this->auth->getUser()) {
+        if (!$user = auth()->user()) {
             throw new \Exception('The user could not be determined.');
         }
 
