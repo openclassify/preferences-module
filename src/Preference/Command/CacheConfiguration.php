@@ -26,7 +26,6 @@ class CacheConfiguration
         $preferences->cacheForever(
             'anomaly.module.preferences::preferences.config',
             function () use ($addons, $configuration) {
-
                 $config = [];
 
                 foreach ($addons->withConfig('preferences') as $namespace => $addon) {

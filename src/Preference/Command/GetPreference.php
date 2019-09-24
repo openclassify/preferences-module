@@ -2,7 +2,6 @@
 
 use Anomaly\PreferencesModule\Preference\Contract\PreferenceRepositoryInterface;
 
-
 /**
  * Class GetPreference
  *

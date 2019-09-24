@@ -14,7 +14,7 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 class ModifyValue
 {
 
-    use DispatchesJobs;
+
 
     /**
      * The preference value.
@@ -36,7 +36,7 @@ class ModifyValue
      * @param PreferenceInterface $preference
      * @param                     $value
      */
-    function __construct(PreferenceInterface $preference, $value)
+    public function __construct(PreferenceInterface $preference, $value)
     {
         $this->value      = $value;
         $this->preference = $preference;
@@ -50,7 +50,7 @@ class ModifyValue
     public function handle()
     {
         /* @var FieldType $type */
-        if ($type = $this->dispatch(new GetValueFieldType($this->preference))) {
+        if ($type = dispatch_now(new GetValueFieldType($this->preference))) {
             return $type->getModifier()->modify($this->value);
         }
 

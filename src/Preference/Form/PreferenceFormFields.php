@@ -1,35 +1,16 @@
 <?php namespace Anomaly\PreferencesModule\Preference\Form;
 
 use Anomaly\PreferencesModule\Preference\Contract\PreferenceRepositoryInterface;
-use Illuminate\Contracts\Config\Repository;
-
 
 /**
  * Class PreferenceFormFields
  *
- * @link          http://pyrocms.com/
- * @author        PyroCMS, Inc. <support@pyrocms.com>
- * @author        Ryan Thompson <ryan@pyrocms.com>
+ * @link   http://pyrocms.com/
+ * @author PyroCMS, Inc. <support@pyrocms.com>
+ * @author Ryan Thompson <ryan@pyrocms.com>
  */
 class PreferenceFormFields
 {
-
-    /**
-     * The config repository.
-     *
-     * @var Repository
-     */
-    protected $config;
-
-    /**
-     * Create a new PreferenceFormFields instance.
-     *
-     * @param Repository $config
-     */
-    public function __construct(Repository $config)
-    {
-        $this->config = $config;
-    }
 
     /**
      * Return the form fields.
@@ -44,11 +25,11 @@ class PreferenceFormFields
          * Get the fields from the config system. Sections are
          * optionally defined the same way.
          */
-        if (!$fields = $this->config->get($namespace . 'preferences/preferences')) {
-            $fields = $fields = $this->config->get($namespace . 'preferences', []);
+        if (!$fields = config($namespace . 'preferences/preferences')) {
+            $fields = $fields = config($namespace . 'preferences', []);
         }
 
-        if ($sections = $this->config->get($namespace . 'preferences/sections')) {
+        if ($sections = config($namespace . 'preferences/sections')) {
             $builder->setSections($sections);
         }
 
@@ -138,7 +119,7 @@ class PreferenceFormFields
             if (isset($field['env']) && isset($field['bind']) && env($field['env']) !== null) {
                 $field['disabled'] = true;
                 $field['warning']  = 'module::message.env_locked';
-                $field['value']    = $this->config->get($field['bind']);
+                $field['value']    = config($field['bind']);
             }
         }
 

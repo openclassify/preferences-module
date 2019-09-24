@@ -7,7 +7,7 @@ use Anomaly\PreferencesModule\Preference\Contract\PreferenceInterface;
 use Anomaly\Streams\Platform\Addon\FieldType\FieldType;
 use Anomaly\Streams\Platform\Addon\FieldType\FieldTypePresenter;
 use Anomaly\Streams\Platform\Model\Preferences\PreferencesPreferencesEntryModel;
-use Anomaly\UsersModule\User\Contract\UserInterface;
+use Anomaly\Streams\Platform\User\Contract\UserInterface;
 use Illuminate\Database\Eloquent\Builder;
 
 /**
@@ -21,23 +21,6 @@ use Illuminate\Database\Eloquent\Builder;
  */
 class PreferenceModel extends PreferencesPreferencesEntryModel implements PreferenceInterface
 {
-
-    /**
-     * Return the value field.
-     *
-     * @return FieldType
-     */
-    public function field()
-    {
-        /* @var FieldType $field */
-        $field = $this->dispatch(new GetValueFieldType($this));
-
-        if (!$field) {
-            return null;
-        }
-
-        return $field;
-    }
 
     /**
      * Limit to preferences belonging to the provided user.
@@ -120,6 +103,25 @@ class PreferenceModel extends PreferencesPreferencesEntryModel implements Prefer
     }
 
     /**
+     * Get the field type's presenter
+     * for a given field slug.
+     *
+     * We're overriding this to catch
+     * the "value" key.
+     *
+     * @param $fieldSlug
+     * @return FieldTypePresenter
+     */
+    public function getFieldTypePresenter($fieldSlug)
+    {
+        if ($fieldSlug == 'value') {
+            return dispatch_now(new GetValuePresenter($this));
+        }
+
+        return parent::getFieldTypePresenter($fieldSlug);
+    }
+
+    /**
      * Set the value.
      *
      * @param $value
@@ -127,7 +129,7 @@ class PreferenceModel extends PreferencesPreferencesEntryModel implements Prefer
      */
     protected function setValueAttribute($value)
     {
-        $this->attributes['value'] = $this->dispatch(new ModifyValue($this, $value));
+        $this->attributes['value'] = dispatch_now(new ModifyValue($this, $value));
 
         return $this;
     }
@@ -147,21 +149,19 @@ class PreferenceModel extends PreferencesPreferencesEntryModel implements Prefer
     }
 
     /**
-     * Get the field type's presenter
-     * for a given field slug.
+     * Return the value field.
      *
-     * We're overriding this to catch
-     * the "value" key.
-     *
-     * @param $fieldSlug
-     * @return FieldTypePresenter
+     * @return FieldType
      */
-    public function getFieldTypePresenter($fieldSlug)
+    public function field()
     {
-        if ($fieldSlug == 'value') {
-            return $this->dispatch(new GetValuePresenter($this));
+        /* @var FieldType $field */
+        $field = dispatch_now(new GetValueFieldType($this));
+
+        if (!$field) {
+            return null;
         }
 
-        return parent::getFieldTypePresenter($fieldSlug);
+        return $field;
     }
 }

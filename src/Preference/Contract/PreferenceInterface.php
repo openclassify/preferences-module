@@ -3,14 +3,14 @@
 use Anomaly\Streams\Platform\Addon\FieldType\FieldType;
 use Anomaly\Streams\Platform\Addon\FieldType\FieldTypePresenter;
 use Anomaly\Streams\Platform\Entry\Contract\EntryInterface;
-use Anomaly\UsersModule\User\Contract\UserInterface;
+use Anomaly\Streams\Platform\User\Contract\UserInterface;
 
 /**
  * Interface PreferenceInterface
  *
- * @link          http://pyrocms.com/
- * @author        PyroCMS, Inc. <support@pyrocms.com>
- * @author        Ryan Thompson <ryan@pyrocms.com>
+ * @link   http://pyrocms.com/
+ * @author PyroCMS, Inc. <support@pyrocms.com>
+ * @author Ryan Thompson <ryan@pyrocms.com>
  */
 interface PreferenceInterface extends EntryInterface
 {

@@ -32,5 +32,4 @@ class PreferencesModule extends Module
         'field_types',
         'plugins',
     ];
-
 }
