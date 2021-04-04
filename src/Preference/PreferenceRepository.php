@@ -50,12 +50,12 @@ class PreferenceRepository extends EntryRepository implements PreferenceReposito
      */
     public function load()
     {
-        $this->preferences = new PreferenceCollection();
-
-        /* @var UserInterface $user */
-        if ($user = auth()->user()) {
-            $this->preferences = $this->model->belongingToUser($user)->get();
-        }
+//        $this->preferences = new PreferenceCollection();
+//
+//        /* @var UserInterface $user */
+//        if ($user = auth()->user()) {
+//            $this->preferences = $this->model->belongingToUser($user)->get();
+//        }
     }
 
     /**
