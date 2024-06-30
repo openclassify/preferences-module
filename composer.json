@@ -1,5 +1,5 @@
 {
-    "name": "anomaly/preferences-module",
+    "name": "visiosoft/preferences-module",
     "type": "streams-addon",
     "description": "System preferences management for the Streams Platform.",
     "keywords": [
