@@ -25,13 +25,13 @@ class PreferencesModulePlugin extends Plugin
     public function getFunctions()
     {
         return [
-            new \Twig_SimpleFunction(
+            new \Twig\TwigFunction(
                 'preference_value',
                 function ($key, $default = null) {
                     return dispatch_now(new GetPreferenceValue($key, $default));
                 }
             ),
-            new \Twig_SimpleFunction(
+            new \Twig\TwigFunction(
                 'preference',
                 function ($key) {
 
