@@ -50,10 +50,10 @@ class PreferenceRepository extends EntryRepository implements PreferenceReposito
     {
         $this->preferences = new PreferenceCollection();
 
-        /* @var UserInterface $user */
-        if ($user = user()) {
-            $this->preferences = $this->model->belongingToUser($user)->get();
-        }
+        //        /* @var UserInterface $user */
+        //        if ($user = auth()->user()) {
+        //            $this->preferences = $this->model->belongingToUser($user)->get();
+        //        } 
     }
 
     /**
