@@ -78,5 +78,4 @@ class PreferencesModuleServiceProvider extends AddonServiceProvider
         'admin/preferences/{type}'         => 'Anomaly\PreferencesModule\Http\Controller\Admin\AddonsController@index',
         'admin/preferences/{type}/{addon}' => 'Anomaly\PreferencesModule\Http\Controller\Admin\AddonsController@edit',
     ];
-
 }

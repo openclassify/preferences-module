@@ -80,7 +80,6 @@ class PreferenceConfiguration
             }
 
             if ($presenter = $this->preferences->presenter($key)) {
-
                 $config[$preference['bind']] = $presenter->__value();
 
                 continue;
@@ -128,7 +127,6 @@ class PreferenceConfiguration
             }
 
             if ($presenter = $this->preferences->presenter($key)) {
-
                 $config[$preference['bind']] = $presenter->__value();
 
                 continue;

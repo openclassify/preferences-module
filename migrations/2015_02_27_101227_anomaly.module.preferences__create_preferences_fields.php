@@ -28,5 +28,4 @@ class AnomalyModulePreferencesCreatePreferencesFields extends Migration
         'key'   => 'anomaly.field_type.text',
         'value' => 'anomaly.field_type.textarea',
     ];
-
 }

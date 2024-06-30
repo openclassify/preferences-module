@@ -35,5 +35,4 @@ class AnomalyModulePreferencesCreatePreferencesStreams extends Migration
         ],
         'value',
     ];
-
 }

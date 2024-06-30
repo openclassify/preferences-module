@@ -4,32 +4,16 @@ use Anomaly\PreferencesModule\Preference\Contract\PreferenceRepositoryInterface;
 use Anomaly\Streams\Platform\Addon\FieldType\FieldType;
 use Anomaly\Streams\Platform\Ui\Form\Contract\FormRepositoryInterface;
 use Anomaly\Streams\Platform\Ui\Form\FormBuilder;
-use Illuminate\Contracts\Config\Repository;
-use Illuminate\Container\Container;
 
 /**
- * Class PreferenceFormRepositoryInterface
+ * Class PreferenceFormRepository
  *
- * @link          http://pyrocms.com/
- * @author        PyroCMS, Inc. <support@pyrocms.com>
- * @author        Ryan Thompson <ryan@pyrocms.com>
+ * @link   http://pyrocms.com/
+ * @author PyroCMS, Inc. <support@pyrocms.com>
+ * @author Ryan Thompson <ryan@pyrocms.com>
  */
 class PreferenceFormRepository implements FormRepositoryInterface
 {
-
-    /**
-     * The config repository.
-     *
-     * @var Repository
-     */
-    protected $config;
-
-    /**
-     * The application container.
-     *
-     * @var Container
-     */
-    protected $container;
 
     /**
      * The preferences repository.
@@ -41,15 +25,11 @@ class PreferenceFormRepository implements FormRepositoryInterface
     /**
      * Create a new PreferenceFormRepositoryInterface instance.
      *
-     * @param Repository                    $config
-     * @param Container                     $container
      * @param PreferenceRepositoryInterface $preferences
      */
-    public function __construct(Repository $config, Container $container, PreferenceRepositoryInterface $preferences)
+    public function __construct(PreferenceRepositoryInterface $preferences)
     {
-        $this->config      = $config;
         $this->preferences = $preferences;
-        $this->container   = $container;
     }
 
     /**
@@ -83,5 +63,7 @@ class PreferenceFormRepository implements FormRepositoryInterface
 
             $this->preferences->set($key, $value);
         }
+
+        return true;
     }
 }

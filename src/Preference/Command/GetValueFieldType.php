@@ -3,14 +3,13 @@
 use Anomaly\PreferencesModule\Preference\Contract\PreferenceInterface;
 use Anomaly\Streams\Platform\Addon\FieldType\FieldType;
 use Anomaly\Streams\Platform\Addon\FieldType\FieldTypeBuilder;
-use Illuminate\Contracts\Config\Repository;
 
 /**
  * Class GetValueFieldType
  *
- * @link          http://pyrocms.com/
- * @author        PyroCMS, Inc. <support@pyrocms.com>
- * @author        Ryan Thompson <ryan@pyrocms.com>
+ * @link   http://pyrocms.com/
+ * @author PyroCMS, Inc. <support@pyrocms.com>
+ * @author Ryan Thompson <ryan@pyrocms.com>
  */
 class GetValueFieldType
 {
@@ -36,11 +35,11 @@ class GetValueFieldType
      * Handle the command.
      *
      * @param  FieldTypeBuilder $fieldTypes
-     * @param  Repository $config
      * @return FieldType
      */
-    public function handle(FieldTypeBuilder $fieldTypes, Repository $config)
+    public function handle(FieldTypeBuilder $fieldTypes)
     {
+
         // Get the preference's key.
         $key = $this->preference->getKey();
 
@@ -48,8 +47,8 @@ class GetValueFieldType
         $value = array_get($this->preference->getAttributes(), 'value');
 
         // Try and find the preference's field configuration.
-        if (!$field = $config->get(str_replace('::', '::preferences/preferences.', $key))) {
-            $field = $config->get(str_replace('::', '::preferences.', $key));
+        if (!$field = config(str_replace('::', '::preferences/preferences.', $key))) {
+            $field = config(str_replace('::', '::preferences.', $key));
         }
 
         // Convert short syntax.

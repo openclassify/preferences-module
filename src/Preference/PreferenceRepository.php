@@ -5,8 +5,7 @@ use Anomaly\PreferencesModule\Preference\Contract\PreferenceRepositoryInterface;
 use Anomaly\Streams\Platform\Addon\FieldType\FieldTypePresenter;
 use Anomaly\Streams\Platform\Entry\EntryRepository;
 use Anomaly\Streams\Platform\Model\EloquentModel;
-use Anomaly\UsersModule\User\Contract\UserInterface;
-use Illuminate\Contracts\Auth\Guard;
+use Anomaly\Streams\Platform\User\Contract\UserInterface;
 
 /**
  * Class PreferenceRepository
@@ -35,7 +34,6 @@ class PreferenceRepository extends EntryRepository implements PreferenceReposito
     /**
      * Create a new PreferenceRepositoryInterface instance.
      *
-     * @param Guard $auth
      * @param PreferenceModel $model
      */
     public function __construct(PreferenceModel $model)
@@ -50,12 +48,12 @@ class PreferenceRepository extends EntryRepository implements PreferenceReposito
      */
     public function load()
     {
-//        $this->preferences = new PreferenceCollection();
-//
-//        /* @var UserInterface $user */
-//        if ($user = auth()->user()) {
-//            $this->preferences = $this->model->belongingToUser($user)->get();
-//        }
+        $this->preferences = new PreferenceCollection();
+
+        //        /* @var UserInterface $user */
+        //        if ($user = auth()->user()) {
+        //            $this->preferences = $this->model->belongingToUser($user)->get();
+        //        } 
     }
 
     /**
@@ -67,17 +65,6 @@ class PreferenceRepository extends EntryRepository implements PreferenceReposito
     public function has($key)
     {
         return $this->preferences->has($key);
-    }
-
-    /**
-     * Get a preference.
-     *
-     * @param $key
-     * @return null|PreferenceInterface
-     */
-    public function get($key)
-    {
-        return $this->preferences->get($key);
     }
 
     /**
@@ -103,6 +90,30 @@ class PreferenceRepository extends EntryRepository implements PreferenceReposito
     }
 
     /**
+     * Find a preference by it's key
+     * or return a new instance.
+     *
+     * @param $key
+     * @return PreferenceInterface
+     */
+    public function findByKeyOrNew($key)
+    {
+        /* @var UserInterface $user */
+        if (!$user = auth()->user()) {
+            throw new \Exception('The user could not be determined.');
+        }
+
+        if (!$preference = $this->model->where('key', $key)->where('user_id', $user->getId())->first()) {
+            $preference = $this->model->newInstance();
+
+            $preference->setKey($key);
+            $preference->setUser($user);
+        }
+
+        return $preference;
+    }
+
+    /**
      * Get a preference value presenter instance.
      *
      * @param                          $key
@@ -119,6 +130,17 @@ class PreferenceRepository extends EntryRepository implements PreferenceReposito
     }
 
     /**
+     * Get a preference.
+     *
+     * @param $key
+     * @return null|PreferenceInterface
+     */
+    public function get($key)
+    {
+        return $this->preferences->get($key);
+    }
+
+    /**
      * Return the field type
      * presenter for a preference.
      *
@@ -132,31 +154,6 @@ class PreferenceRepository extends EntryRepository implements PreferenceReposito
         }
 
         return null;
-    }
-
-    /**
-     * Find a preference by it's key
-     * or return a new instance.
-     *
-     * @param $key
-     * @return PreferenceInterface
-     */
-    public function findByKeyOrNew($key)
-    {
-        /* @var UserInterface $user */
-        if (!$user = auth()->user()) {
-            throw new \Exception('The user could not be determined.');
-        }
-
-        if (!$preference = $this->model->where('key', $key)->where('user_id', $user->getId())->first()) {
-
-            $preference = $this->model->newInstance();
-
-            $preference->setKey($key);
-            $preference->setUser($user);
-        }
-
-        return $preference;
     }
 
     /**
