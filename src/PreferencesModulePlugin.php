@@ -1,48 +1,59 @@
-<?php namespace Anomaly\PreferencesModule;
+<?php namespace Anomaly\PreferencesModule\Preference\Command;
 
-use Anomaly\PreferencesModule\Preference\Command\GetPreference;
-use Anomaly\PreferencesModule\Preference\Command\GetPreferenceValue;
-use Anomaly\PreferencesModule\Preference\Command\GetValueFieldType;
 use Anomaly\PreferencesModule\Preference\Contract\PreferenceInterface;
-use Anomaly\Streams\Platform\Addon\Plugin\Plugin;
-
+use Anomaly\Streams\Platform\Addon\FieldType\FieldType;
+use Illuminate\Foundation\Bus\DispatchesJobs;
 
 /**
- * Class PreferencesModulePlugin
+ * Class ModifyValue
  *
  * @link          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
  */
-class PreferencesModulePlugin extends Plugin
+class ModifyValue
 {
 
+
+
     /**
-     * Get the functions.
+     * The preference value.
      *
-     * @return array
+     * @var mixed
      */
-    public function getFunctions()
+    protected $value;
+
+    /**
+     * The preference instance.
+     *
+     * @var PreferenceInterface
+     */
+    protected $preference;
+
+    /**
+     * Create a new ModifyValue instance.
+     *
+     * @param PreferenceInterface $preference
+     * @param                     $value
+     */
+    public function __construct(PreferenceInterface $preference, $value)
     {
-        return [
-            new \Twig\TwigFunction(
-                'preference_value',
-                function ($key, $default = null) {
-                    return dispatch_now(new GetPreferenceValue($key, $default));
-                }
-            ),
-            new \Twig\TwigFunction(
-                'preference',
-                function ($key) {
+        $this->value      = $value;
+        $this->preference = $preference;
+    }
 
-                    /* @var PreferenceInterface $preference */
-                    if (!$preference = dispatch_now(new GetPreference($key))) {
-                        return null;
-                    }
+    /**
+     * Handle the command.
+     *
+     * @return mixed
+     */
+    public function handle()
+    {
+        /* @var FieldType $type */
+        if ($type = dispatch_sync(new GetValueFieldType($this->preference))) {
+            return $type->getModifier()->modify($this->value);
+        }
 
-                    return decorate(dispatch_now(new GetValueFieldType($preference)));
-                }
-            ),
-        ];
+        return $this->value;
     }
 }
