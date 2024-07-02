@@ -50,7 +50,7 @@ class ModifyValue
     public function handle()
     {
         /* @var FieldType $type */
-        if ($type = dispatch_now(new GetValueFieldType($this->preference))) {
+        if ($type = dispatch_sync(new GetValueFieldType($this->preference))) {
             return $type->getModifier()->modify($this->value);
         }
 
