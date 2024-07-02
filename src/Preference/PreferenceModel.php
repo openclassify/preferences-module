@@ -115,7 +115,7 @@ class PreferenceModel extends PreferencesPreferencesEntryModel implements Prefer
     public function getFieldTypePresenter($fieldSlug)
     {
         if ($fieldSlug == 'value') {
-            return dispatch_now(new GetValuePresenter($this));
+            return dispatch_sync(new GetValuePresenter($this));
         }
 
         return parent::getFieldTypePresenter($fieldSlug);
@@ -129,7 +129,7 @@ class PreferenceModel extends PreferencesPreferencesEntryModel implements Prefer
      */
     protected function setValueAttribute($value)
     {
-        $this->attributes['value'] = dispatch_now(new ModifyValue($this, $value));
+        $this->attributes['value'] = dispatch_sync(new ModifyValue($this, $value));
 
         return $this;
     }
@@ -156,7 +156,7 @@ class PreferenceModel extends PreferencesPreferencesEntryModel implements Prefer
     public function field()
     {
         /* @var FieldType $field */
-        $field = dispatch_now(new GetValueFieldType($this));
+        $field = dispatch_sync(new GetValueFieldType($this));
 
         if (!$field) {
             return null;
